@@ -1,0 +1,38 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "windows",
+            "includePath": [
+                "${workspaceFolder}/**",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/cores/esp8266",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/cores/esp8266/**",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/cores/**",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/libraries/**",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/libraries/esp8266/src",
+                // "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino",
+                // "C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/tools/sdk/libc/xtensa-lx106-elf/include/**",
+                // "C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/sys",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/tools/sdk/libc/xtensa-lx106-elf/include",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/tools/sdk",
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/tools/sdk/**"
+                // "C:/Users/shins/source/repos/NodeMCU Board Libraries/**",
+                // "C:/Program Files (x86)/Arduino/**",
+                "C:/Users/shins/AppData/Local/Arduino15/packages/esp8266/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "F_CPU=80000000L",
+                "ARDUINO=10805",
+                "ESP8266_NODEMCU",
+                "ARDUINO_ARCH_AVR"
+            ],
+            "compilerPath": "C:/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-cpp.exe",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ]
+}

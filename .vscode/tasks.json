@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "sketch compile",
+            "type": "shell",
+            "command": "arduino-cli",
+            "args": [
+                "compile",
+                "-b",
+                "${config:fqbn}",
+                "--build-path",
+                "${workspaceFolder}/bld",
+                "--output-dir",
+                "${workspaceFolder}/bin",
+                "${fileDirname}"
+            ],
+            "problemMatcher":"$gcc",
+            "group":"build"
+        },
+
+        {
+            "label": "sketch upload",
+            "type": "shell",
+            "command": "arduino-cli",
+            "args": [
+                "upload",
+                "-b",
+                "${config:fqbn}",
+                "--input-dir",
+                "${workspaceFolder}/bin",
+                "-p",
+                "${config:port}"
+            ],
+            "group": "build",
+            "problemMatcher":"$gcc",
+            "dependsOn": "sketch compile"
+        }
+    ]
+}
