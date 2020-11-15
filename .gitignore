@@ -1,0 +1,17 @@
+# Manual Entries
+bin
+bld
+
+# VSCode Master
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Manual Overrides
+!.vscode/c_cpp_properties.json
