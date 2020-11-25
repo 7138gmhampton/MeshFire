@@ -24,7 +24,12 @@ void setup()
 
 void loop()
 {
-    if (flame_sensor.isDetectingFire()) Serial.println("Fire!");
+    if (flame_sensor.isDetectingFire()) {
+        Serial.println("Fire!");
+        const char *notification = "Fire detected!";
+        radio.send((uint8_t*)notification, strlen(notification));
+        radio.waitPacketSent();
+    }
     else Serial.println("All clear...");
 
     Serial.print("Max msg length for this driver ");
