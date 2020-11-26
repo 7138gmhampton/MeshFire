@@ -18,12 +18,14 @@ void Transceiver::transmitData(const char* packet)
     radio.waitPacketSent();
 }
 
-bool Transceiver::readBuffer(char* packet) 
+bool Transceiver::readBuffer(uint8_t* packet) 
 { 
     bool attempt = radio.recv(buffer, &packet_length);
 
     if (attempt) {
-        strcpy(packet, (const char*) buffer);
+        // strcpy(packet, (const char*) buffer);
+        // *packet = *buffer;
+        memcpy(buffer, packet, packet_length);
         return true;
     }
     // return (char*)buffer;
