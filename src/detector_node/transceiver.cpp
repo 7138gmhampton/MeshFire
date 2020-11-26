@@ -24,3 +24,5 @@ char* Transceiver::readBuffer()
 
     return (char*)buffer;
 }
+
+bool Transceiver::initialiseRadio() { return radio.init(); }
