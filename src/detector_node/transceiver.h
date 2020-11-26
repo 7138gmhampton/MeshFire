@@ -19,7 +19,7 @@ namespace MeshNetwork
         public:
             Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin, uint8_t packet_length = 32);
             void transmitData(const char* packet);
-            char* readBuffer();
+            bool readBuffer(char* packet);
             bool initialiseRadio();
     };
 }
