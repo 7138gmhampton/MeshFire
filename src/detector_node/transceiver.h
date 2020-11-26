@@ -13,7 +13,7 @@ namespace MeshNetwork
         private:
             uint8_t receiver_pin;
             uint8_t transmitter_pin;
-            char* buffer;
+            uint8_t* buffer;
             RH_ASK radio;
             uint8_t packet_length;
         public:

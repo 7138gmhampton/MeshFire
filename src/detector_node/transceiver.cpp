@@ -13,3 +13,10 @@ Transceiver::Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin, uint8_t 
 }
 
 void Transceiver::transmitData(const char* packet) { radio.send((uint8_t*)packet, packet_length); }
+
+char* Transceiver::readBuffer() 
+{ 
+    radio.recv(buffer, &packet_length);
+
+    return (char*)buffer;
+}
