@@ -79,7 +79,7 @@ void loop()
     // }
     uint8_t receipt_buffer[PACKET_LENGTH];
     uint8_t buffer_length = sizeof(receipt_buffer);
-    if (radio->readBuffer(receipt_buffer)) {
+    if (radio->receiveData(receipt_buffer)) {
         Serial.print("Received: ");
         Serial.println((char*)receipt_buffer);
     }
