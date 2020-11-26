@@ -1,7 +1,6 @@
 #ifndef TRANSCEIVER_H
 #define TRANSCEIVER_H
 
-// #include <stdint.h>
 #include <Arduino.h>
 #include <RadioHead.h>
 #include <RH_ASK.h>
