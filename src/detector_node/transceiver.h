@@ -11,10 +11,10 @@ namespace MeshNetwork
     class Transceiver
     {
         private:
-            uint8_t receiver_pin_;
-            uint8_t transmitter_pin_;
-            char* buffer_;
-            RH_ASK radio_;
+            uint8_t receiver_pin;
+            uint8_t transmitter_pin;
+            char* buffer;
+            RH_ASK radio;
         public:
             Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin);
             void transmitData(const char* packet);
