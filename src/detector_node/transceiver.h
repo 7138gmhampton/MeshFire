@@ -20,7 +20,9 @@ namespace MeshNetwork
         public:
             Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin, uint8_t packet_length);
             void transmitData(const char* packet);
+            /// Returns true if transmission was received properly and copies it to the out parameter
             bool receiveData(uint8_t* packet);
+            /// Returns true/false based on success of initialisation
             bool initialiseRadio();
     };
 }
