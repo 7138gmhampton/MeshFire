@@ -9,7 +9,6 @@ class FlameSensor
         uint8_t pin;
 
     public:
-        FlameSensor();
         FlameSensor(uint8_t pin);
         bool isDetectingFire();
 };
