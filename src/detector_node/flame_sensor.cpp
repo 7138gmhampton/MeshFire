@@ -2,7 +2,7 @@
 
 #include "flame_sensor.h"
 
-FlameSensor::FlameSensor() { }
+// FlameSensor::FlameSensor() { }
 
 FlameSensor::FlameSensor(uint8_t pin)
 {

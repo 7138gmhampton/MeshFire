@@ -13,14 +13,14 @@
 #define RECEIVER_PIN D8
 #define PACKET_LENGTH 32
 
-FlameSensor flame_sensor;
+FlameSensor* flame_sensor;
 // RH_ASK radio(2000, RECEIVER_PIN, TRANSMITTER_PIN);
 // const char *notification = "Fire detected!";
 MeshNetwork::Transceiver* radio;
 
 void notifyOfFire()
 {
-    if (flame_sensor.isDetectingFire()) {
+    if (flame_sensor->isDetectingFire()) {
         char message[PACKET_LENGTH];
         memset(message, 60, PACKET_LENGTH);
 
@@ -33,7 +33,7 @@ void setup()
 {
     Serial.begin(115200);
     
-    flame_sensor = FlameSensor(FLAME_SENSOR_PIN);
+    flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
     // if (!driver)
     // if (!radio.init()) Serial.println("Radio failed to initialise");
     radio = new MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN, PACKET_LENGTH);
