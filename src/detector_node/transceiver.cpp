@@ -3,7 +3,7 @@
 
 using namespace MeshNetwork;
 
-Transceiver::Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin, uint8_t packet_length = 32)
+Transceiver::Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin, uint8_t packet_length)
 {
     this->receiver_pin = receiver_pin;
     this->transmitter_pin = transmitter_pin;
