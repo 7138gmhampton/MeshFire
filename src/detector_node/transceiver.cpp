@@ -20,9 +20,9 @@ void Transceiver::transmitData(const char* packet)
 
 bool Transceiver::receiveData(uint8_t* packet) 
 { 
-    bool attempt = radio.recv(buffer, &packet_length);
+    bool received = radio.recv(buffer, &packet_length);
 
-    if (attempt) {
+    if (received) {
         memcpy(buffer, packet, packet_length);
         return true;
     }
