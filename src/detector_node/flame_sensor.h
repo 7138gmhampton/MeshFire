@@ -1,7 +1,8 @@
 #ifndef FLAME_SENSOR_H
 #define FLAME_SENSOR_H
 
-#include <stdint.h>
+// #include <stdint.h>
+#include <Arduino.h>
 
 class FlameSensor
 {
