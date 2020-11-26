@@ -16,7 +16,7 @@
 FlameSensor flame_sensor;
 // RH_ASK radio(2000, RECEIVER_PIN, TRANSMITTER_PIN);
 // const char *notification = "Fire detected!";
-MeshNetwork::Transceiver radio;
+MeshNetwork::Transceiver* radio;
 
 void notifyOfFire()
 {
@@ -24,7 +24,7 @@ void notifyOfFire()
         char message[PACKET_LENGTH];
         memset(message, 60, PACKET_LENGTH);
 
-        radio.transmitData(message);
+        radio->transmitData(message);
         Serial.println("Fire detected");
     }
 }
@@ -32,11 +32,14 @@ void notifyOfFire()
 void setup()
 {
     Serial.begin(115200);
+    
     flame_sensor = FlameSensor(FLAME_SENSOR_PIN);
     // if (!driver)
     // if (!radio.init()) Serial.println("Radio failed to initialise");
-    radio = MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN);
-    if (!radio.initialiseRadio()) Serial.println("Radio failed to initialise");
+    radio = new MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN, PACKET_LENGTH);
+    if (!radio->initialiseRadio()) Serial.println("Radio failed to initialise");
+    
+    attachInterrupt(digitalPinToInterrupt(D1), notifyOfFire, FALLING);
 }
 
 void loop()
@@ -76,7 +79,7 @@ void loop()
     // }
     uint8_t receipt_buffer[PACKET_LENGTH];
     uint8_t buffer_length = sizeof(receipt_buffer);
-    if (radio.readBuffer(receipt_buffer)) {
+    if (radio->readBuffer(receipt_buffer)) {
         Serial.print("Received: ");
         Serial.println((char*)receipt_buffer);
     }
