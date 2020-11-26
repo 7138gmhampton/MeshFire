@@ -18,6 +18,17 @@ FlameSensor flame_sensor;
 // const char *notification = "Fire detected!";
 MeshNetwork::Transceiver radio;
 
+void notifyOfFire()
+{
+    if (flame_sensor.isDetectingFire()) {
+        char message[PACKET_LENGTH];
+        memset(message, 60, PACKET_LENGTH);
+
+        radio.transmitData(message);
+        Serial.println("Fire detected");
+    }
+}
+
 void setup()
 {
     Serial.begin(115200);
