@@ -1,8 +1,4 @@
-// #include <Arduino.h>
-
 #include "flame_sensor.h"
-
-// FlameSensor::FlameSensor() { }
 
 FlameSensor::FlameSensor(uint8_t pin)
 {
@@ -11,9 +7,4 @@ FlameSensor::FlameSensor(uint8_t pin)
     pinMode(pin, INPUT);
 }
 
-bool FlameSensor::isDetectingFire()
-{
-    // bool response = digitalRead(pin) == LOW;
-    // return response;
-    return digitalRead(pin) == LOW;
-}
+bool FlameSensor::isDetectingFire() { return digitalRead(pin) == LOW; }
