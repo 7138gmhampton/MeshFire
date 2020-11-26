@@ -1,9 +1,6 @@
 #include <Arduino.h>
-#include <RadioHead.h>
-#include <HardwareSerial.h>
 #include <pins_arduino.h>
-#include <RH_ASK.h>
-#include <SPI.h>
+// #include <RH_ASK.h>
 
 #include "flame_sensor.h"
 #include "transceiver.h"

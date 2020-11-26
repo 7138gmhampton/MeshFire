@@ -3,6 +3,7 @@
 
 // #include <stdint.h>
 #include <Arduino.h>
+#include <RadioHead.h>
 #include <RH_ASK.h>
 #include <SPI.h>
 
