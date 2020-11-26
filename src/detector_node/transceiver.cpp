@@ -18,7 +18,7 @@ void Transceiver::transmitData(const char* packet)
     radio.waitPacketSent();
 }
 
-bool Transceiver::readBuffer(uint8_t* packet) 
+bool Transceiver::receiveData(uint8_t* packet) 
 { 
     bool attempt = radio.recv(buffer, &packet_length);
 
