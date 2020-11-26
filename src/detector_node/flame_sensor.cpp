@@ -6,13 +6,13 @@ FlameSensor::FlameSensor() { }
 
 FlameSensor::FlameSensor(uint8_t pin)
 {
-    pin_ = pin;
+    this->pin = pin;
 
-    pinMode(pin_, INPUT);
+    pinMode(pin, INPUT);
 }
 
 bool FlameSensor::isDetectingFire()
 {
-    bool response = digitalRead(pin_) == LOW;
+    bool response = digitalRead(pin) == LOW;
     return response;
 }

@@ -6,7 +6,7 @@
 class FlameSensor
 {
     private:
-        uint8_t pin_;
+        uint8_t pin;
 
     public:
         FlameSensor();
