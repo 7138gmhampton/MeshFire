@@ -12,7 +12,11 @@ Transceiver::Transceiver(uint8_t receiver_pin, uint8_t transmitter_pin, uint8_t 
     this->radio = RH_ASK(2000, receiver_pin, transmitter_pin);
 }
 
-void Transceiver::transmitData(const char* packet) { radio.send((uint8_t*)packet, packet_length); }
+void Transceiver::transmitData(const char* packet) 
+{ 
+    radio.send((uint8_t*)packet, packet_length);
+    radio.waitPacketSent();
+}
 
 char* Transceiver::readBuffer() 
 { 
