@@ -13,6 +13,7 @@ FlameSensor::FlameSensor(uint8_t pin)
 
 bool FlameSensor::isDetectingFire()
 {
-    bool response = digitalRead(pin) == LOW;
-    return response;
+    // bool response = digitalRead(pin) == LOW;
+    // return response;
+    return digitalRead(pin) == LOW;
 }
