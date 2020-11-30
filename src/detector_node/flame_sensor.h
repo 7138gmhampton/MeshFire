@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 
+/// Represents YGS1006 based breakout board for sensing flames using infrared
 class FlameSensor
 {
     private:
