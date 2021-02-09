@@ -35,6 +35,40 @@
             "group": "build",
             "problemMatcher":"$gcc",
             "dependsOn": "sketch compile"
+        },
+
+        // Test Suite Compilation
+        {
+            "label": "compile test suite",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-c",
+                "../../src/test/${fileBasename}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/bld/test"
+            },
+            "problemMatcher":"$gcc"
+        },
+
+        {
+            "label": "build test suite",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "../../bld/test/${fileBasenameNoExtension}.o",
+                "-o",
+                "${fileBasenameNoExtension}.exe",
+                "-lgtest",
+                "-lgtest_main"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/bin/test"
+            },
+            "group": "test",
+            "problemMatcher":"$gcc",
+            "dependsOn": "compile test suite"
         }
     ]
 }
