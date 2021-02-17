@@ -16,6 +16,8 @@ WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Transceiver* radio;
 
+volatile bool notifying = false;
+
 void notifyOfFire()
 {
     if (flame_sensor->isDetectingFire()) {
@@ -42,6 +44,13 @@ void notifyOfIncident()
 
         http.end();
     }
+
+    notifying = false;
+}
+
+ICACHE_RAM_ATTR void fireDetect()
+{
+    if (flame_sensor->isDetectingFire()) notifying = true;
 }
 
 void setup()
@@ -59,6 +68,7 @@ void setup()
     // if (!radio->initialiseRadio()) Serial.println("Radio failed to initialise");
     
     // attachInterrupt(digitalPinToInterrupt(D1), notifyOfFire, FALLING);
+    attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
 }
 
 void loop()
@@ -69,6 +79,8 @@ void loop()
     //     Serial.print("Received: ");
     //     Serial.println((char*)receipt_buffer);
     // }
+    if (notifying) notifyOfIncident();
+    
     Serial.print(flame_sensor->isDetectingFire());
     delay(1000);
 }
