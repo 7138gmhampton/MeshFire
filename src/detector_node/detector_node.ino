@@ -34,6 +34,13 @@ void notifyOfIncident()
         char incident_characters[5];
         sprintf(incident_characters, "%4d", incident_number);
         String incident_code = String(incident_characters);
+
+        HTTPClient http;
+        http.begin("https://mayar.abertay.ac.uk/~0407435/mesh-fire/scripts/server/append-incident?incident=" + incident_code);
+
+        http.GET();
+
+        http.end();
     }
 }
 
