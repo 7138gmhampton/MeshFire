@@ -33,20 +33,24 @@ void setup()
     // Connect to WiFi
     wifi_manager.setConfigPortalTimeout(180);
     wifi_manager.autoConnect();
+    Serial.print("IP Address: ");
+    Serial.println(WiFi.localIP());
     
     flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
-    radio = new MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN, PACKET_LENGTH);
-    if (!radio->initialiseRadio()) Serial.println("Radio failed to initialise");
+    // radio = new MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN, PACKET_LENGTH);
+    // if (!radio->initialiseRadio()) Serial.println("Radio failed to initialise");
     
-    attachInterrupt(digitalPinToInterrupt(D1), notifyOfFire, FALLING);
+    // attachInterrupt(digitalPinToInterrupt(D1), notifyOfFire, FALLING);
 }
 
 void loop()
 {
-    uint8_t receipt_buffer[PACKET_LENGTH];
-    uint8_t buffer_length = sizeof(receipt_buffer);
-    if (radio->receiveData(receipt_buffer)) {
-        Serial.print("Received: ");
-        Serial.println((char*)receipt_buffer);
-    }
+    // uint8_t receipt_buffer[PACKET_LENGTH];
+    // uint8_t buffer_length = sizeof(receipt_buffer);
+    // if (radio->receiveData(receipt_buffer)) {
+    //     Serial.print("Received: ");
+    //     Serial.println((char*)receipt_buffer);
+    // }
+    Serial.print(flame_sensor->isDetectingFire());
+    delay(1000);
 }
