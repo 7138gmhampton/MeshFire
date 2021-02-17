@@ -2,6 +2,7 @@
 #include <pins_arduino.h>
 // #include <WiFiManager.h>
 #include <WiFiManager.h>
+#include <ESP8266HTTPClient.h>
 
 #include "flame_sensor.h"
 #include "transceiver.h"
@@ -23,6 +24,16 @@ void notifyOfFire()
 
         radio->transmitData(message);
         Serial.println("Fire detected");
+    }
+}
+
+void notifyOfIncident()
+{
+    if (flame_sensor->isDetectingFire()) {
+        short incident_number = random(9999);
+        char incident_characters[5];
+        sprintf(incident_characters, "%4d", incident_number);
+        String incident_code = String(incident_characters);
     }
 }
 
