@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <pins_arduino.h>
+// #include <WiFiManager.h>
+#include <WiFiManager.h>
 
 #include "flame_sensor.h"
 #include "transceiver.h"
@@ -9,6 +11,7 @@
 #define RECEIVER_PIN D8
 #define PACKET_LENGTH 32
 
+WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Transceiver* radio;
 
@@ -26,6 +29,10 @@ void notifyOfFire()
 void setup()
 {
     Serial.begin(115200);
+
+    // Connect to WiFi
+    wifi_manager.setConfigPortalTimeout(180);
+    wifi_manager.autoConnect();
     
     flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
     radio = new MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN, PACKET_LENGTH);
