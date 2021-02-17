@@ -1,6 +1,20 @@
 {
     "fqbn": "esp8266:esp8266:nodemcuv2",
     "port": "COM4",
+    "editor.rulers": [
+        {
+            "color": "#ccffcc",
+            "column": 80
+        },
+        {
+            "column": 100,
+            "color": "#ffffcc"
+        },
+        {
+            "color": "#ffcccc",
+            "column": 120
+        }
+    ],
     "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
