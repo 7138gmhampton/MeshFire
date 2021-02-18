@@ -18,16 +18,16 @@ MeshNetwork::Transceiver* radio;
 
 volatile bool notifying = false;
 
-void notifyOfFire()
-{
-    if (flame_sensor->isDetectingFire()) {
-        char message[PACKET_LENGTH];
-        memset(message, 60, PACKET_LENGTH);
+// void notifyOfFire()
+// {
+//     if (flame_sensor->isDetectingFire()) {
+//         char message[PACKET_LENGTH];
+//         memset(message, 60, PACKET_LENGTH);
 
-        radio->transmitData(message);
-        Serial.println("Fire detected");
-    }
-}
+//         radio->transmitData(message);
+//         Serial.println("Fire detected");
+//     }
+// }
 
 void notifyOfIncident()
 {
