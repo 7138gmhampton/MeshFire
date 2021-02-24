@@ -1,6 +1,7 @@
 # Manual Entries
 bin
 bld
+www/data
 
 # VSCode Master
 .vscode/*
