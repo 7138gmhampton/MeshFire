@@ -18,17 +18,6 @@ MeshNetwork::Transceiver* radio;
 
 volatile bool notifying = false;
 
-// void notifyOfFire()
-// {
-//     if (flame_sensor->isDetectingFire()) {
-//         char message[PACKET_LENGTH];
-//         memset(message, 60, PACKET_LENGTH);
-
-//         radio->transmitData(message);
-//         Serial.println("Fire detected");
-//     }
-// }
-
 void notifyOfIncident()
 {
     if (flame_sensor->isDetectingFire()) {
@@ -38,7 +27,6 @@ void notifyOfIncident()
         String incident_code = String(incident_characters);
 
         HTTPClient http;
-        // http.begin("https://mayar.abertay.ac.uk/~0407435/mesh-fire/scripts/server/append-incident?incident=" + incident_code);
         http.begin("http://139.59.173.54/mesh-fire/scripts/server/append-incident.php?incident=" + incident_code);
 
         http.GET();
@@ -65,21 +53,12 @@ void setup()
     Serial.println(WiFi.localIP());
     
     flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
-    // radio = new MeshNetwork::Transceiver(RECEIVER_PIN, TRANSMITTER_PIN, PACKET_LENGTH);
-    // if (!radio->initialiseRadio()) Serial.println("Radio failed to initialise");
     
-    // attachInterrupt(digitalPinToInterrupt(D1), notifyOfFire, FALLING);
     attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
 }
 
 void loop()
 {
-    // uint8_t receipt_buffer[PACKET_LENGTH];
-    // uint8_t buffer_length = sizeof(receipt_buffer);
-    // if (radio->receiveData(receipt_buffer)) {
-    //     Serial.print("Received: ");
-    //     Serial.println((char*)receipt_buffer);
-    // }
     if (notifying) notifyOfIncident();
     
     Serial.print(flame_sensor->isDetectingFire());
