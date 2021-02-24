@@ -38,7 +38,8 @@ void notifyOfIncident()
         String incident_code = String(incident_characters);
 
         HTTPClient http;
-        http.begin("https://mayar.abertay.ac.uk/~0407435/mesh-fire/scripts/server/append-incident?incident=" + incident_code);
+        // http.begin("https://mayar.abertay.ac.uk/~0407435/mesh-fire/scripts/server/append-incident?incident=" + incident_code);
+        http.begin("http://139.59.173.54/mesh-fire/scripts/server/append-incident.php?incident=" + incident_code);
 
         http.GET();
 
