@@ -1,6 +1,10 @@
 <?php
 require_once('database.php');
 
+/**
+ * Models the notification of the flames sensors on the nodes against the 
+ * database. Parameters and return values are all in JSON.
+ */
 class IncidentModel extends Database
 {
     public static function getAllIncidents()
@@ -22,6 +26,23 @@ class IncidentModel extends Database
 
         $response = json_encode($result);
         return $response;
+    }
+
+    public static function createIncident($incident)
+    {
+        $command = 'INSERT INTO incident (code) VALUES (:code)';
+        $incident_array = json_decode($incident);
+
+        try {
+            $statement = self::prepareStatement($command);
+            $statement->bindParam(':code', $incident_array['code']);
+
+            $statement->execute();
+        }
+        catch (PDOException $err) {
+            echo 'Error: ' . $err->getMessage();
+            return null;
+        }
     }
 }
 ?>
