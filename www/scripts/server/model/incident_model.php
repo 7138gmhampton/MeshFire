@@ -13,7 +13,7 @@ class IncidentModel extends Database
         $result = null;
 
         try {
-            $statement = self::prepareStatement($command);
+            $statement = self::prepareStatement($command, self::$down_user, self::$down_password);
 
             $statement->execute();
 
@@ -34,7 +34,7 @@ class IncidentModel extends Database
         $incident_array = json_decode($incident, true);
 
         try {
-            $statement = self::prepareStatement($command);
+            $statement = self::prepareStatement($command, self::$up_user, self::$up_password);
             $statement->bindParam(':code', $incident_array['code']);
 
             $statement->execute();
