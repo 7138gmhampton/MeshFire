@@ -31,7 +31,7 @@ class IncidentModel extends Database
     public static function createIncident($incident)
     {
         $command = 'INSERT INTO incident (code) VALUES (:code)';
-        $incident_array = json_decode($incident);
+        $incident_array = json_decode($incident, true);
 
         try {
             $statement = self::prepareStatement($command);
