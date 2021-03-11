@@ -3,6 +3,7 @@
 // #include <WiFiManager.h>
 #include <WiFiManager.h>
 #include <ESP8266HTTPClient.h>
+#include <LoRa_E32.h>
 
 #include "flame_sensor.h"
 #include "transceiver.h"
@@ -15,6 +16,7 @@
 WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Transceiver* radio;
+LoRa_E32 lora_transceiver(D2, D3);
 
 volatile bool notifying = false;
 
@@ -42,6 +44,13 @@ ICACHE_RAM_ATTR void fireDetect()
     if (flame_sensor->isDetectingFire()) notifying = true;
 }
 
+ICACHE_RAM_ATTR void sendDummyRadio()
+{
+    ResponseStatus response_status = lora_transceiver.sendMessage("Check...1...2...");
+    Serial.println("Button press message:");
+    Serial.println(response_status.getResponseDescription());
+}
+
 void setup()
 {
     Serial.begin(115200);
@@ -55,12 +64,26 @@ void setup()
     flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
     
     attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
+
+    lora_transceiver.begin();
+    ResponseStatus response_status = lora_transceiver.sendMessage("Hello, World?");
+    Serial.println(response_status.getResponseDescription());
+    attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, RISING);
 }
 
 void loop()
 {
-    if (notifying) notifyOfIncident();
+    // if (notifying) notifyOfIncident();
     
-    Serial.print(flame_sensor->isDetectingFire());
-    delay(1000);
+    // Serial.print(flame_sensor->isDetectingFire());
+    // delay(1000);
+
+    if (lora_transceiver.available() > 1) {
+        ResponseContainer response_container = lora_transceiver.receiveMessage();
+        if (response_container.status.code != 1) 
+            Serial.println(response_container.status.getResponseDescription());
+        else Serial.println(response_container.data);
+    }
+
+    delay(250);
 }
