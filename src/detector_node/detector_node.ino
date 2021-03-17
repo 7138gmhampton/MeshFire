@@ -21,7 +21,8 @@
 WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Transceiver* radio;
-LoRa_E32 lora_transceiver(D2, D3);
+// LoRa_E32 lora_transceiver(D2, D3);
+SoftwareSerial lora_serial(D2, D3);
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
@@ -74,23 +75,26 @@ void setup()
     
     attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
 
-    lora_transceiver.begin();
+    // lora_transceiver.begin();
 
-    ResponseStructContainer config_container = lora_transceiver.getConfiguration();
-    Configuration lora_config = *(Configuration*)config_container.data;
-    Serial.print("Channel - ");
-    Serial.println(lora_config.getChannelDescription());
-    // lora_config.CHAN = FREQUENCY_868;
-    lora_config.CHAN = 0x06;
-    Serial.print("Channel Set - ");
-    Serial.println(lora_config.getChannelDescription());
-    lora_transceiver.setConfiguration(lora_config);
-    int dummy = OPERATING_FREQUENCY;
+    // ResponseStructContainer config_container = lora_transceiver.getConfiguration();
+    // Configuration lora_config = *(Configuration*)config_container.data;
+    // Serial.print("Channel - ");
+    // Serial.println(lora_config.getChannelDescription());
+    // // lora_config.CHAN = FREQUENCY_868;
+    // lora_config.CHAN = 0x06;
+    // Serial.print("Channel Set - ");
+    // Serial.println(lora_config.getChannelDescription());
+    // lora_transceiver.setConfiguration(lora_config);
+    // int dummy = OPERATING_FREQUENCY;
 
-    ResponseStatus response_status = lora_transceiver.sendMessage("Hello, World?");
-    Serial.println(response_status.getResponseDescription());
-    pinMode(D7, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
+    // ResponseStatus response_status = lora_transceiver.sendMessage("Hello, World?");
+    // Serial.println(response_status.getResponseDescription());
+    // pinMode(D7, INPUT_PULLUP);
+    // attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
+
+    lora_serial.begin(9600);
+    // char this_dummy[11] = WiFi.hostname().toCharArray();
 }
 
 void loop()
@@ -102,19 +106,29 @@ void loop()
 
     // Serial.println(digitalRead(D7));
 
+    // if (dummy_send) {
+    //     ResponseStatus response_status = lora_transceiver.sendMessage("Check...1...2...");
+    //     Serial.println("Button press message:");
+    //     Serial.println(response_status.getResponseDescription());
+    //     dummy_send = false;
+    // }
+
+    // if (lora_transceiver.available() > 1) {
+    //     ResponseContainer response_container = lora_transceiver.receiveMessage();
+    //     if (response_container.status.code != 1) 
+    //         Serial.println(response_container.status.getResponseDescription());
+    //     else Serial.println(response_container.data);
+    // }
+
+    // delay(250);
+
     if (dummy_send) {
-        ResponseStatus response_status = lora_transceiver.sendMessage("Check...1...2...");
-        Serial.println("Button press message:");
-        Serial.println(response_status.getResponseDescription());
-        dummy_send = false;
+        char message_buffer[11];
+        WiFi.macAddress().toCharArray(message_buffer, 11);
+        lora_serial.write(message_buffer);
     }
 
-    if (lora_transceiver.available() > 1) {
-        ResponseContainer response_container = lora_transceiver.receiveMessage();
-        if (response_container.status.code != 1) 
-            Serial.println(response_container.status.getResponseDescription());
-        else Serial.println(response_container.data);
+    if (lora_serial.available()) {
+        Serial.write(lora_serial.read());
     }
-
-    delay(250);
 }
