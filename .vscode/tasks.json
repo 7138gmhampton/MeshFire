@@ -30,7 +30,7 @@
                 "--input-dir",
                 "${workspaceFolder}/bin",
                 "-p",
-                "${config:port}"
+                "${input:port}"
             ],
             "group": "build",
             "problemMatcher":"$gcc"
@@ -69,6 +69,14 @@
             "group": "test",
             "problemMatcher":"$gcc",
             "dependsOn": "compile test suite"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "port",
+            "type": "pickString",
+            "description": "Port to upload to",
+            "options": ["COM4", "COM5"]
         }
     ]
 }
