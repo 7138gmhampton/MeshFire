@@ -90,8 +90,8 @@ void setup()
 
     // ResponseStatus response_status = lora_transceiver.sendMessage("Hello, World?");
     // Serial.println(response_status.getResponseDescription());
-    // pinMode(D7, INPUT_PULLUP);
-    // attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
+    pinMode(D7, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
 
     lora_serial.begin(9600);
     // char this_dummy[11] = WiFi.hostname().toCharArray();
@@ -123,12 +123,18 @@ void loop()
     // delay(250);
 
     if (dummy_send) {
-        char message_buffer[11];
-        WiFi.macAddress().toCharArray(message_buffer, 11);
-        lora_serial.write(message_buffer);
+        // char message_buffer[11];
+        // WiFi.macAddress().toCharArray(message_buffer, 11);
+        // lora_serial.write(message_buffer);
+        // Serial.write(message_buffer);
+        lora_serial.write("Check...1...2...\n\r");
+        Serial.write("Send message\n\r");
+        dummy_send = false;
     }
 
     if (lora_serial.available()) {
+        Serial.write("Message received - ");
         Serial.write(lora_serial.read());
+        Serial.write("\n\r");
     }
 }
