@@ -3,10 +3,12 @@
 // #include <WiFiManager.h>
 #include <WiFiManager.h>
 #include <ESP8266HTTPClient.h>
+#include <SoftwareSerial.h>
+#include "EBYTE.h"
 
-#define FREQUENCY_868
+// #define FREQUENCY_868
 
-#include <LoRa_E32.h>
+// #include <LoRa_E32.h>
 
 #include "flame_sensor.h"
 #include "transceiver.h"
@@ -20,9 +22,10 @@
 
 WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
-MeshNetwork::Transceiver* radio;
+// MeshNetwork::Transceiver* radio;
 // LoRa_E32 lora_transceiver(D2, D3);
-SoftwareSerial lora_serial(D2, D3);
+SoftwareSerial lora_serial(14, 12);
+EBYTE lora_transceiver(&lora_serial, 13, 15, 3);
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
@@ -62,18 +65,19 @@ ICACHE_RAM_ATTR void sendDummyRadio()
 void setup()
 {
     Serial.begin(115200);
+    Serial.print("Serial logging - Check\n\r");
 
     // Connect to WiFi
-    wifi_manager.setConfigPortalTimeout(180);
+    // wifi_manager.setConfigPortalTimeout(180);
     // WiFi.macAddress()
     // wifi_manager.setHostname()
-    wifi_manager.autoConnect();
-    Serial.print("IP Address: ");
-    Serial.println(WiFi.localIP());
+    // wifi_manager.autoConnect();
+    // Serial.print("IP Address: ");
+    // Serial.println(WiFi.localIP());
     
-    flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
+    // flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
     
-    attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
+    // attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
 
     // lora_transceiver.begin();
 
@@ -90,11 +94,15 @@ void setup()
 
     // ResponseStatus response_status = lora_transceiver.sendMessage("Hello, World?");
     // Serial.println(response_status.getResponseDescription());
-    pinMode(D7, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
+    // pinMode(D7, INPUT_PULLUP);
+    // attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
 
     lora_serial.begin(9600);
     // char this_dummy[11] = WiFi.hostname().toCharArray();
+    lora_transceiver.init();
+    lora_transceiver.PrintParameters();
+    // lora_transceiver.
+    lora_serial.write("Check...1...2...\n\r");
 }
 
 void loop()
@@ -137,4 +145,6 @@ void loop()
         Serial.write(lora_serial.read());
         Serial.write("\n\r");
     }
+    // Serial.println("Check this");
+    delay(250);
 }
