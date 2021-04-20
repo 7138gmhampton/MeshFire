@@ -12,6 +12,15 @@ Radio::Radio(uint8_t rx_pin, uint8_t tx_pin, uint8_t m0_pin, uint8_t m1_pin, uin
     transceiver->init();
 }
 
+Radio::Radio(SoftwareSerial serial, EBYTE transceiver)
+{
+    this->transceiver_serial = &serial;
+    this->transceiver = &transceiver;
+
+    transceiver_serial->begin(9600);
+    this->transceiver->init();
+}
+
 void Radio::displayParameters()
 {
     transceiver->PrintParameters();
