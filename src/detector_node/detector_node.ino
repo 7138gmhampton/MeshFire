@@ -11,7 +11,8 @@
 // #include <LoRa_E32.h>
 
 #include "flame_sensor.h"
-#include "transceiver.h"
+// #include "transceiver.h"
+#include "radio.h"
 
 #define FLAME_SENSOR_PIN D1
 #define TRANSMITTER_PIN D3
@@ -24,8 +25,9 @@ WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 // MeshNetwork::Transceiver* radio;
 // LoRa_E32 lora_transceiver(D2, D3);
-SoftwareSerial lora_serial(14, 12);
-EBYTE lora_transceiver(&lora_serial, 13, 15, 3);
+// SoftwareSerial lora_serial(14, 12);
+// EBYTE lora_transceiver(&lora_serial, 13, 15, 3);
+MeshNetwork::Radio* radio; 
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
@@ -97,12 +99,15 @@ void setup()
     // pinMode(D7, INPUT_PULLUP);
     // attachInterrupt(digitalPinToInterrupt(D7), sendDummyRadio, FALLING);
 
-    lora_serial.begin(9600);
+    // lora_serial.begin(9600);
     // char this_dummy[11] = WiFi.hostname().toCharArray();
-    lora_transceiver.init();
-    lora_transceiver.PrintParameters();
+    // lora_transceiver.init();
+    // lora_transceiver.PrintParameters();
     // lora_transceiver.
-    lora_serial.write("Check...1...2...\n\r");
+    // lora_serial.write("Check...1...2...\n\r");
+
+    radio = new MeshNetwork::Radio(D5, D6, D7, D8, D9);
+    radio->displayParameters();
 }
 
 void loop()
@@ -135,16 +140,16 @@ void loop()
         // WiFi.macAddress().toCharArray(message_buffer, 11);
         // lora_serial.write(message_buffer);
         // Serial.write(message_buffer);
-        lora_serial.write("Check...1...2...\n\r");
+        // lora_serial.write("Check...1...2...\n\r");
         Serial.write("Send message\n\r");
         dummy_send = false;
     }
 
-    if (lora_serial.available()) {
-        Serial.write("Message received - ");
-        Serial.write(lora_serial.read());
-        Serial.write("\n\r");
-    }
+    // if (lora_serial.available()) {
+    //     Serial.write("Message received - ");
+    //     Serial.write(lora_serial.read());
+    //     Serial.write("\n\r");
+    // }
     // Serial.println("Check this");
     delay(250);
 }
