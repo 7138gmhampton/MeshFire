@@ -12,8 +12,8 @@ namespace MeshNetwork
     class Radio
     {
         private:
-            SoftwareSerial transceiver_serial;
-            EBYTE transceiver;
+            SoftwareSerial* transceiver_serial;
+            EBYTE* transceiver;
         
         public:
             Radio(uint8_t rx_pin, uint8_t tx_pin, uint8_t m0_pin, uint8_t m1_pin, uint8_t aux_pin);
