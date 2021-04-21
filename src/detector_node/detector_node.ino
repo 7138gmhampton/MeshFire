@@ -1,22 +1,19 @@
 #include <Arduino.h>
-#include <pins_arduino.h>
-// #include <WiFiManager.h>
 #include <WiFiManager.h>
 #include <ESP8266HTTPClient.h>
+#include <SoftwareSerial.h>
+#include "EBYTE.h"
 
 #include "flame_sensor.h"
-#include "transceiver.h"
-
-#define FLAME_SENSOR_PIN D1
-#define TRANSMITTER_PIN D3
-#define RECEIVER_PIN D8
-#define PACKET_LENGTH 32
+#include "radio.h"
 
 WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
-MeshNetwork::Transceiver* radio;
+MeshNetwork::Radio* radio; 
 
 volatile bool notifying = false;
+volatile bool dummy_send = false;
+FireEvent* waiting_message = nullptr;
 
 void notifyOfIncident()
 {
@@ -42,25 +39,35 @@ ICACHE_RAM_ATTR void fireDetect()
     if (flame_sensor->isDetectingFire()) notifying = true;
 }
 
+ICACHE_RAM_ATTR void sendDummyRadio()
+{
+    waiting_message = new FireEvent();
+    strcpy(waiting_message->identifier, "1234");
+}
+
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(MCU_BAUD);
+    Serial.print("Serial logging - Check\n\r");
 
-    // Connect to WiFi
-    wifi_manager.setConfigPortalTimeout(180);
-    wifi_manager.autoConnect();
-    Serial.print("IP Address: ");
-    Serial.println(WiFi.localIP());
-    
-    flame_sensor = new FlameSensor(FLAME_SENSOR_PIN);
-    
-    attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
+    radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
+    radio->displayParameters();
+
+    pinMode(D1, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
 }
 
 void loop()
 {
-    if (notifying) notifyOfIncident();
-    
-    Serial.print(flame_sensor->isDetectingFire());
-    delay(1000);
+    if (waiting_message != nullptr) {
+        radio->transmit(*waiting_message);
+        waiting_message = nullptr;
+    }
+
+    while (radio->hasWaiting()) {
+        FireEvent display_message = radio->getNextMessage();
+        Serial.println(display_message.identifier);
+    }
+
+    delay(250);
 }
