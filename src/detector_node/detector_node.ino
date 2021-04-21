@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <pins_arduino.h>
 #include <WiFiManager.h>
 #include <ESP8266HTTPClient.h>
 #include <SoftwareSerial.h>
@@ -7,11 +6,6 @@
 
 #include "flame_sensor.h"
 #include "radio.h"
-
-#define FLAME_SENSOR_PIN D1
-#define TRANSMITTER_PIN D3
-#define RECEIVER_PIN D8
-#define PACKET_LENGTH 32
 
 WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
@@ -56,7 +50,7 @@ void setup()
     Serial.begin(115200);
     Serial.print("Serial logging - Check\n\r");
 
-    radio = new MeshNetwork::Radio(D5, D6, D7, D8, D9);
+    radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
 
     pinMode(D1, INPUT_PULLUP);
