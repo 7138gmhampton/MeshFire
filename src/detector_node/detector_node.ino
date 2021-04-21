@@ -47,7 +47,7 @@ ICACHE_RAM_ATTR void sendDummyRadio()
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(MCU_BAUD);
     Serial.print("Serial logging - Check\n\r");
 
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);

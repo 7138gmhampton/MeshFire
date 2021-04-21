@@ -10,6 +10,9 @@
 #define M1_PIN D8
 #define AUX_PIN D9
 
+#define RADIO_BAUD 9600
+#define MCU_BAUD 115200
+
 typedef struct FireEvent
 {
     char identifier[5];
