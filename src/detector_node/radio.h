@@ -9,6 +9,8 @@
 
 namespace MeshNetwork
 {
+    /// Represents the LoRa transceivers that the nodes use to communicate
+    /// node-to-node
     class Radio
     {
         private:
