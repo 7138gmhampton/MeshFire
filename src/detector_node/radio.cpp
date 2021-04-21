@@ -30,3 +30,8 @@ void Radio::transmitNotification(FireEvent notification)
 {
     transceiver->SendStruct(&notification, sizeof(notification));
 }
+
+bool Radio::hasWaiting()
+{
+    return transceiver->available();
+}
