@@ -60,7 +60,7 @@ void setup()
 void loop()
 {
     if (waiting_message != nullptr) {
-        radio->transmitNotification(*waiting_message);
+        radio->transmit(*waiting_message);
         waiting_message = nullptr;
     }
 

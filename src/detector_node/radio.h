@@ -21,7 +21,7 @@ namespace MeshNetwork
             Radio(uint8_t rx_pin, uint8_t tx_pin, uint8_t m0_pin, uint8_t m1_pin, uint8_t aux_pin);
             Radio(SoftwareSerial serial, EBYTE transceiver);
 
-            void transmitNotification(FireEvent notification);
+            void transmit(FireEvent notification);
             bool hasWaiting();
             FireEvent getNextMessage();
             void displayParameters();

@@ -25,7 +25,7 @@ void Radio::displayParameters()
     transceiver->PrintParameters();
 }
 
-void Radio::transmitNotification(FireEvent notification)
+void Radio::transmit(FireEvent notification)
 {
     transceiver->SendStruct(&notification, sizeof(notification));
 }
