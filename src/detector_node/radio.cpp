@@ -35,3 +35,12 @@ bool Radio::hasWaiting()
 {
     return transceiver->available();
 }
+
+FireEvent Radio::getNextMessage()
+{
+    FireEvent next_message;
+
+    transceiver->GetStruct(&next_message, sizeof(next_message));
+
+    return next_message;
+}
