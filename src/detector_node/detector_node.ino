@@ -31,6 +31,7 @@ MeshNetwork::Radio* radio;
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
+FireEvent* waiting_message = nullptr;
 
 void notifyOfIncident()
 {
@@ -61,7 +62,11 @@ ICACHE_RAM_ATTR void sendDummyRadio()
     // ResponseStatus response_status = lora_transceiver.sendMessage("Check...1...2...");
     // Serial.println("Button press message:");
     // Serial.println(response_status.getResponseDescription());
-    dummy_send = true;
+    // dummy_send = true;
+
+    waiting_message = new FireEvent();
+    // waiting_message->identifier = "1234";
+    strcpy(waiting_message->identifier, "1234");
 }
 
 void setup()
@@ -108,6 +113,9 @@ void setup()
 
     radio = new MeshNetwork::Radio(D5, D6, D7, D8, D9);
     radio->displayParameters();
+
+    pinMode(D1, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
 }
 
 void loop()
@@ -135,15 +143,15 @@ void loop()
 
     // delay(250);
 
-    if (dummy_send) {
-        // char message_buffer[11];
-        // WiFi.macAddress().toCharArray(message_buffer, 11);
-        // lora_serial.write(message_buffer);
-        // Serial.write(message_buffer);
-        // lora_serial.write("Check...1...2...\n\r");
-        Serial.write("Send message\n\r");
-        dummy_send = false;
-    }
+    // if (dummy_send) {
+    //     // char message_buffer[11];
+    //     // WiFi.macAddress().toCharArray(message_buffer, 11);
+    //     // lora_serial.write(message_buffer);
+    //     // Serial.write(message_buffer);
+    //     // lora_serial.write("Check...1...2...\n\r");
+    //     Serial.write("Send message\n\r");
+    //     dummy_send = false;
+    // }
 
     // if (lora_serial.available()) {
     //     Serial.write("Message received - ");
@@ -151,5 +159,16 @@ void loop()
     //     Serial.write("\n\r");
     // }
     // Serial.println("Check this");
+
+    if (waiting_message != nullptr) {
+        radio->transmitNotification(*waiting_message);
+        waiting_message = nullptr;
+    }
+
+    while (radio->hasWaiting()) {
+        FireEvent display_message = radio->getNextMessage();
+        Serial.println(display_message.identifier);
+    }
+
     delay(250);
 }
