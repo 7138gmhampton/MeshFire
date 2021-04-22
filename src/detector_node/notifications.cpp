@@ -9,3 +9,8 @@ bool Notifications::isInLog(FireEvent notification)
 
     return false;
 }
+
+void Notifications::addEvent(FireEvent event)
+{
+    if (!isInLog(event)) unprocessed_events.push_back(event);
+}
