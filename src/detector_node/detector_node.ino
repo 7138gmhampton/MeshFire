@@ -6,12 +6,12 @@
 
 #include "flame_sensor.h"
 #include "radio.h"
-#include "notifications.h"
+#include "event_log.h"
 #include "wifi_portal.h"
 
 FlameSensor* flame_sensor;
 MeshNetwork::Radio* radio; 
-Notifications* event_log;
+EventLog* event_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
 
@@ -48,7 +48,7 @@ void setup()
     Serial.print("Serial logging - Check\n\r");
 
     web = new WifiPortal();
-    event_log = new Notifications();
+    event_log = new EventLog();
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
     dispatcher = new Dispatcher(radio);

@@ -1,8 +1,8 @@
-#include "notifications.h"
+#include "event_log.h"
 
-Notifications::Notifications() { }
+EventLog::EventLog() { }
 
-bool Notifications::isInLog(FireEvent event)
+bool EventLog::isInLog(FireEvent event)
 {
     for (auto it = recent_events.cbegin(); it != recent_events.cend(); ++it) 
         if (event == *it) return true;
@@ -10,14 +10,14 @@ bool Notifications::isInLog(FireEvent event)
     return false;
 }
 
-void Notifications::addEvent(FireEvent event)
+void EventLog::addEvent(FireEvent event)
 {
     if (!isInLog(event)) unprocessed_events.push_back(event);
 }
 
-bool Notifications::hasUnprocessed() { return unprocessed_events.size() > 0; }
+bool EventLog::hasUnprocessed() { return unprocessed_events.size() > 0; }
 
-void Notifications::processNext(Dispatcher* dispatcher)
+void EventLog::processNext(Dispatcher* dispatcher)
 {
     FireEvent next_event = unprocessed_events.front();
 

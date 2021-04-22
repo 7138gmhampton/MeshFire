@@ -8,7 +8,7 @@
 
 using std::deque;
 
-class Notifications
+class EventLog
 {
     private:
         deque<FireEvent> unprocessed_events;
@@ -17,7 +17,7 @@ class Notifications
         bool isInLog(FireEvent notification);
 
     public:
-        Notifications();
+        EventLog();
 
         void addEvent(FireEvent event);
         /// If log exceeds 100 entries, this function will remove them until
