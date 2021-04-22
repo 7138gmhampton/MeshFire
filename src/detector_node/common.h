@@ -1,6 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <Arduino.h>
 #include <pins_arduino.h>
 
 #define FLAME_SENSOR_PIN D1
