@@ -10,6 +10,7 @@
 #define M0_PIN D7
 #define M1_PIN D8
 #define AUX_PIN D9
+#define CLEAR_WIFI_PIN D2
 
 #define RADIO_BAUD 9600
 #define MCU_BAUD 115200
