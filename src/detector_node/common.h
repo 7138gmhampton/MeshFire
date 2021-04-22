@@ -18,7 +18,7 @@ typedef struct FireEvent
 {
     char identifier[5];
 
-    bool operator==(const FireEvent& other) const { return strcmp(identifier, other.identifier); }
+    bool operator==(const FireEvent& other) const { return strcmp(identifier, other.identifier) == 0; }
 };
 
 #endif // COMMON_H
