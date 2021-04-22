@@ -60,8 +60,8 @@ void setup()
 void loop()
 {
     while (radio->hasWaiting()) {
-        FireEvent display_message = radio->getNextMessage();
-        event_log->addEvent(display_message);
+        FireEvent received = radio->getNextMessage();
+        event_log->addEvent(received);
     }
 
     while (event_log->hasUnprocessed()) event_log->processNext(dispatcher);
