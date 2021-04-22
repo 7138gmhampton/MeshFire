@@ -2,16 +2,20 @@
 #define NOTIFICATIONS_H
 
 #include <queue>
+#include <deque>
 
 #include "common.h"
 
 using std::queue;
+using std::deque;
 
 class Notifications
 {
     private:
-        queue<FireEvent> unprocessed_events;
-        queue<FireEvent> recent_events;
+        deque<FireEvent> unprocessed_events;
+        deque<FireEvent> recent_events;
+
+        bool isInLog(FireEvent notification);
 
     public:
         Notifications();
