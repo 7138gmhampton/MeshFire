@@ -12,6 +12,7 @@ WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Radio* radio; 
 Notifications* event_log;
+Dispatcher* dispatcher;
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
@@ -60,9 +61,11 @@ void setup()
     Serial.println(mac);
 
     event_log = new Notifications();
+    // dispatcher = new Dispatcher()
 
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
+    dispatcher = new Dispatcher(radio);
 
     pinMode(D1, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
@@ -82,7 +85,7 @@ void loop()
     }
 
     while (event_log->hasUnprocessed())
-        event_log->processNext(radio);
+        event_log->processNext(dispatcher);
 
     delay(250);
 }
