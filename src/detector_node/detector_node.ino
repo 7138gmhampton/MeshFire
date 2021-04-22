@@ -9,16 +9,11 @@
 #include "notifications.h"
 #include "wifi_portal.h"
 
-// WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Radio* radio; 
 Notifications* event_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
-
-volatile bool notifying = false;
-volatile bool dummy_send = false;
-FireEvent* waiting_message = nullptr;
 
 void notifyOfIncident()
 {
@@ -35,8 +30,6 @@ void notifyOfIncident()
 
         http.end();
     }
-
-    notifying = false;
 }
 
 ICACHE_RAM_ATTR void fireDetect()
@@ -46,12 +39,6 @@ ICACHE_RAM_ATTR void fireDetect()
 
 ICACHE_RAM_ATTR void sendDummyRadio()
 {
-    // waiting_message = new FireEvent();
-    // strcpy(waiting_message->identifier, "1234");
-    // FireEvent* dummy_event;
-    // *dummy_event = {.identifier = "1234"};
-    // FireEvent dummy_event = {.identifier = "1234"};
-    // event_log->addEvent(dummy_event);
     event_log->addEvent(FlameSensor::generateEvent());
 }
 
@@ -59,13 +46,9 @@ void setup()
 {
     Serial.begin(MCU_BAUD);
     Serial.print("Serial logging - Check\n\r");
-    // String mac = WiFi.macAddress();
-    // Serial.println(mac);
 
     web = new WifiPortal();
     event_log = new Notifications();
-    // dispatcher = new Dispatcher()
-
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
     dispatcher = new Dispatcher(radio);
@@ -76,14 +59,8 @@ void setup()
 
 void loop()
 {
-    // if (waiting_message != nullptr) {
-    //     radio->transmit(*waiting_message);
-    //     waiting_message = nullptr;
-    // }
-
     while (radio->hasWaiting()) {
         FireEvent display_message = radio->getNextMessage();
-        // Serial.println(display_message.identifier);
         event_log->addEvent(display_message);
     }
 
