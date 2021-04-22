@@ -1,13 +1,11 @@
 #ifndef NOTIFICATIONS_H
 #define NOTIFICATIONS_H
 
-#include <queue>
 #include <deque>
 
 #include "common.h"
 #include "dispatcher.h"
 
-using std::queue;
 using std::deque;
 
 class Notifications

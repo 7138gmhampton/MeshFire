@@ -1,6 +1,3 @@
-#include <SoftwareSerial.h>
-
-#include "radio.h"
 #include "notifications.h"
 
 Notifications::Notifications() { }
