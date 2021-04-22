@@ -77,7 +77,8 @@ void loop()
 
     while (radio->hasWaiting()) {
         FireEvent display_message = radio->getNextMessage();
-        Serial.println(display_message.identifier);
+        // Serial.println(display_message.identifier);
+        event_log->addEvent(display_message);
     }
 
     while (event_log->hasUnprocessed())

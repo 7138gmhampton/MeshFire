@@ -25,6 +25,7 @@ void Notifications::processNext(MeshNetwork::Radio* dispatcher)
     FireEvent next_event = unprocessed_events.front();
 
     dispatcher->transmit(next_event);
+    Serial.println(next_event.identifier);
 
     unprocessed_events.pop_front();
     recent_events.push_back(next_event);
