@@ -7,12 +7,14 @@
 #include "flame_sensor.h"
 #include "radio.h"
 #include "notifications.h"
+#include "wifi_portal.h"
 
-WiFiManager wifi_manager;
+// WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Radio* radio; 
 Notifications* event_log;
 Dispatcher* dispatcher;
+WifiPortal* web;
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
@@ -57,9 +59,10 @@ void setup()
 {
     Serial.begin(MCU_BAUD);
     Serial.print("Serial logging - Check\n\r");
-    String mac = WiFi.macAddress();
-    Serial.println(mac);
+    // String mac = WiFi.macAddress();
+    // Serial.println(mac);
 
+    web = new WifiPortal();
     event_log = new Notifications();
     // dispatcher = new Dispatcher()
 
