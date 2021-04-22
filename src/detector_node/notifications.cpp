@@ -1,4 +1,7 @@
+#include <SoftwareSerial.h>
+
 #include "notifications.h"
+#include "radio.h"
 
 Notifications::Notifications() { }
 
@@ -13,4 +16,15 @@ bool Notifications::isInLog(FireEvent notification)
 void Notifications::addEvent(FireEvent event)
 {
     if (!isInLog(event)) unprocessed_events.push_back(event);
+}
+
+bool Notifications::hasUnprocessed() { return unprocessed_events.size() > 0; }
+
+void Notifications::processNext(MeshNetwork::Radio* dispatcher)
+{
+    FireEvent next_event = unprocessed_events.front();
+
+    dispatcher->transmit(next_event);
+
+    unprocessed_events.pop_front();
 }

@@ -25,7 +25,7 @@ class Notifications
         /// only 50 remain - beginning with the oldest
         void pruneLog();
         bool hasUnprocessed();
-        void processNext();
+        void processNext(MeshNetwork::Radio* dispatcher);
 };
 
 #endif // NOTIFICATIONS_H
