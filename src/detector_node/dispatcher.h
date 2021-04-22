@@ -6,6 +6,8 @@
 #include "common.h"
 #include "radio.h"
 
+/// Handles the dispatching of events that are new to that node - to either
+/// the web portal or to the LoRa interlinks
 class Dispatcher
 {
     private:
