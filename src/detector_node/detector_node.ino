@@ -38,7 +38,7 @@ void notifyOfIncident()
 
 ICACHE_RAM_ATTR void fireDetect()
 {
-    if (flame_sensor->isDetectingFire()) notifying = true;
+    if (flame_sensor->isDetectingFire()) event_log->addEvent(FlameSensor::generateEvent());
 }
 
 ICACHE_RAM_ATTR void sendDummyRadio()
@@ -47,14 +47,17 @@ ICACHE_RAM_ATTR void sendDummyRadio()
     // strcpy(waiting_message->identifier, "1234");
     // FireEvent* dummy_event;
     // *dummy_event = {.identifier = "1234"};
-    FireEvent dummy_event = {.identifier = "1234"};
-    event_log->addEvent(dummy_event);
+    // FireEvent dummy_event = {.identifier = "1234"};
+    // event_log->addEvent(dummy_event);
+    event_log->addEvent(FlameSensor::generateEvent());
 }
 
 void setup()
 {
     Serial.begin(MCU_BAUD);
     Serial.print("Serial logging - Check\n\r");
+    String mac = WiFi.macAddress();
+    Serial.println(mac);
 
     event_log = new Notifications();
 
