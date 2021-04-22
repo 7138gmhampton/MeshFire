@@ -6,6 +6,8 @@
 
 #include "common.h"
 
+/// Represents the connection to the internet and the server via the on-board
+/// WiFi chip
 class WifiPortal
 {
     private:
