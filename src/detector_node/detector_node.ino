@@ -84,8 +84,7 @@ void loop()
         event_log->addEvent(display_message);
     }
 
-    while (event_log->hasUnprocessed())
-        event_log->processNext(dispatcher);
+    while (event_log->hasUnprocessed()) event_log->processNext(dispatcher);
 
     delay(250);
 }
