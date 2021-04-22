@@ -6,10 +6,12 @@
 
 #include "flame_sensor.h"
 #include "radio.h"
+#include "notifications.h"
 
 WiFiManager wifi_manager;
 FlameSensor* flame_sensor;
 MeshNetwork::Radio* radio; 
+Notifications* event_log;
 
 volatile bool notifying = false;
 volatile bool dummy_send = false;
@@ -41,14 +43,20 @@ ICACHE_RAM_ATTR void fireDetect()
 
 ICACHE_RAM_ATTR void sendDummyRadio()
 {
-    waiting_message = new FireEvent();
-    strcpy(waiting_message->identifier, "1234");
+    // waiting_message = new FireEvent();
+    // strcpy(waiting_message->identifier, "1234");
+    // FireEvent* dummy_event;
+    // *dummy_event = {.identifier = "1234"};
+    FireEvent dummy_event = {.identifier = "1234"};
+    event_log->addEvent(dummy_event);
 }
 
 void setup()
 {
     Serial.begin(MCU_BAUD);
     Serial.print("Serial logging - Check\n\r");
+
+    event_log = new Notifications();
 
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
@@ -59,15 +67,18 @@ void setup()
 
 void loop()
 {
-    if (waiting_message != nullptr) {
-        radio->transmit(*waiting_message);
-        waiting_message = nullptr;
-    }
+    // if (waiting_message != nullptr) {
+    //     radio->transmit(*waiting_message);
+    //     waiting_message = nullptr;
+    // }
 
     while (radio->hasWaiting()) {
         FireEvent display_message = radio->getNextMessage();
         Serial.println(display_message.identifier);
     }
+
+    while (event_log->hasUnprocessed())
+        event_log->processNext(radio);
 
     delay(250);
 }
