@@ -2,9 +2,9 @@
 
 WifiPortal::WifiPortal()
 {
-    pinMode(CLEAR_WIFI_PIN, INPUT);
+    pinMode(CLEAR_WIFI_PIN, INPUT_PULLUP);
 
-    if (digitalRead(CLEAR_WIFI_PIN) == HIGH) {
+    if (digitalRead(CLEAR_WIFI_PIN) == LOW) {
         manager.resetSettings();
         active = false;
     }
