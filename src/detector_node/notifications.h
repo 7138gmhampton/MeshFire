@@ -5,6 +5,7 @@
 #include <deque>
 
 #include "common.h"
+#include "dispatcher.h"
 
 using std::queue;
 using std::deque;
@@ -25,7 +26,7 @@ class Notifications
         /// only 50 remain - beginning with the oldest
         void pruneLog();
         bool hasUnprocessed();
-        void processNext(MeshNetwork::Radio* dispatcher);
+        void processNext(Dispatcher* dispatcher);
 };
 
 #endif // NOTIFICATIONS_H

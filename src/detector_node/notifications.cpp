@@ -20,11 +20,11 @@ void Notifications::addEvent(FireEvent event)
 
 bool Notifications::hasUnprocessed() { return unprocessed_events.size() > 0; }
 
-void Notifications::processNext(MeshNetwork::Radio* dispatcher)
+void Notifications::processNext(Dispatcher* dispatcher)
 {
     FireEvent next_event = unprocessed_events.front();
 
-    dispatcher->transmit(next_event);
+    dispatcher->dispatch(next_event);
     Serial.println(next_event.identifier);
 
     unprocessed_events.pop_front();
