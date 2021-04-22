@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 
-#include "notifications.h"
 #include "radio.h"
+#include "notifications.h"
 
 Notifications::Notifications() { }
 
@@ -27,4 +27,5 @@ void Notifications::processNext(MeshNetwork::Radio* dispatcher)
     dispatcher->transmit(next_event);
 
     unprocessed_events.pop_front();
+    recent_events.push_back(next_event);
 }
