@@ -2,10 +2,10 @@
 
 Notifications::Notifications() { }
 
-bool Notifications::isInLog(FireEvent notification)
+bool Notifications::isInLog(FireEvent event)
 {
     for (auto it = recent_events.cbegin(); it != recent_events.cend(); ++it) 
-        if (notification == *it) return true;
+        if (event == *it) return true;
 
     return false;
 }
@@ -22,7 +22,6 @@ void Notifications::processNext(Dispatcher* dispatcher)
     FireEvent next_event = unprocessed_events.front();
 
     dispatcher->dispatch(next_event);
-    Serial.println(next_event.identifier);
 
     unprocessed_events.pop_front();
     recent_events.push_back(next_event);
