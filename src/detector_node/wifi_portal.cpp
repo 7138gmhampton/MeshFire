@@ -13,3 +13,18 @@ WifiPortal::WifiPortal()
         active = manager.autoConnect();
     }
 }
+
+void WifiPortal::post(FireEvent event)
+{
+    HTTPClient http;
+    http.begin("http://139.59.173.54/mesh-fire/scripts/server/append-incident.php");
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    String event_code = String(event.identifier);
+    String payload = "incident=" + event_code;
+
+    int response = http.POST(payload);
+    Serial.print("POST - ");
+    Serial.println(response);
+    http.end();
+}

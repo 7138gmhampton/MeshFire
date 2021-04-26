@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <WiFiManager.h>
+#include <ESP8266HTTPClient.h>
 
 #include "common.h"
 
