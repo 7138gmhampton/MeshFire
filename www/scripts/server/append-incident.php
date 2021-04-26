@@ -20,7 +20,8 @@ require_once('/var/www/html/mesh-fire/scripts/server/controller/incident_control
 
 //     $connection->close();
 // }
-if (isset($_GET['incident'])) {
-    IncidentController::create($_GET['incident']);
+if (isset($_POST['incident'])) {
+    IncidentController::create($_POST['incident']);
 }
+else http_response_code(400);
 ?>
