@@ -11,7 +11,7 @@ class FlameSensor
     private:
         uint8_t pin;
 
-        String generateRandomIdentifier();
+        static String generateRandomIdentifier();
 
     public:
         FlameSensor(uint8_t pin);
