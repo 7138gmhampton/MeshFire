@@ -18,3 +18,16 @@ FireEvent FlameSensor::generateEvent()
 
     return event;
 }
+
+String FlameSensor::generateRandomIdentifier()
+{
+    const String base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    String identifier = "";
+
+    while (identifier.length() < 7) {
+        int random_number = random(64);
+        identifier += base64[random_number];
+    }
+
+    return identifier;
+}
