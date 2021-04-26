@@ -51,7 +51,7 @@ void setup()
     event_log = new EventLog();
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
-    dispatcher = new Dispatcher(radio);
+    dispatcher = new Dispatcher(radio, web);
 
     pinMode(D1, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
