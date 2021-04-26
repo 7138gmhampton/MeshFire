@@ -5,6 +5,7 @@
 
 #include "common.h"
 #include "radio.h"
+#include "wifi_portal.h"
 
 /// Handles the dispatching of events that are new to that node - to either
 /// the web portal or to the LoRa interlinks
@@ -12,9 +13,10 @@ class Dispatcher
 {
     private:
         MeshNetwork::Radio* radio;
+        WifiPortal* web;
     
     public:
-        Dispatcher(MeshNetwork::Radio* radio);
+        Dispatcher(MeshNetwork::Radio* radio, WifiPortal* web);
 
         void dispatch(FireEvent event);
 };
