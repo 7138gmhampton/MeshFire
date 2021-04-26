@@ -44,7 +44,7 @@ ICACHE_RAM_ATTR void sendDummyRadio()
 
 void setup()
 {
-    Serial.begin(MCU_BAUD);
+    Serial.begin(RADIO_BAUD);
     Serial.print("Serial logging - Check\n\r");
 
     web = new WifiPortal();
