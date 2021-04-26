@@ -8,7 +8,6 @@ Dispatcher::Dispatcher(MeshNetwork::Radio* radio, WifiPortal* web)
 
 void Dispatcher::dispatch(FireEvent event)
 {
-    // radio->transmit(event);
     if (web->isActive()) web->post(event);
     else radio->transmit(event);
 }

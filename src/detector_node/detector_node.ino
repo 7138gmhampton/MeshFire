@@ -15,23 +15,6 @@ EventLog* event_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
 
-void notifyOfIncident()
-{
-    if (flame_sensor->isDetectingFire()) {
-        short incident_number = random(9999);
-        char incident_characters[5];
-        sprintf(incident_characters, "%4d", incident_number);
-        String incident_code = String(incident_characters);
-
-        HTTPClient http;
-        http.begin("http://139.59.173.54/mesh-fire/scripts/server/append-incident.php?incident=" + incident_code);
-
-        http.GET();
-
-        http.end();
-    }
-}
-
 ICACHE_RAM_ATTR void fireDetect()
 {
     if (flame_sensor->isDetectingFire()) event_log->addEvent(FlameSensor::generateEvent());
