@@ -12,8 +12,7 @@
 #define AUX_PIN D9
 #define CLEAR_WIFI_PIN D2
 
-#define RADIO_BAUD 9600
-#define MCU_BAUD 115200
+#define BAUD_RATE 9600
 
 typedef struct FireEvent
 {
