@@ -15,21 +15,27 @@ EventLog* event_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
 
-ICACHE_RAM_ATTR void fireDetect();
+volatile bool sensor_blanked = false;
+unsigned long blanking_start;
 
-ICACHE_RAM_ATTR void reinitialiseSensor()
-{
-    attachInterrupt(FLAME_SENSOR_PIN, fireDetect, FALLING);
-}
+// ICACHE_RAM_ATTR void fireDetect();
+
+// ICACHE_RAM_ATTR void reinitialiseSensor()
+// {
+//     // attachInterrupt(FLAME_SENSOR_PIN, fireDetect, FALLING);
+//     sensor_blanked = false;
+// }
 
 ICACHE_RAM_ATTR void fireDetect()
 {
-    if (flame_sensor->isDetectingFire()) {
+    if ((millis() - blanking_start > 30000) && flame_sensor->isDetectingFire()) {
         event_log->addEvent(FlameSensor::generateEvent());
-        detachInterrupt(FLAME_SENSOR_PIN);
-        timer1_attachInterrupt(reinitialiseSensor);
-        timer1_enable(TIM_DIV16, TIM_EDGE, TIM_SINGLE);
-        timer1_write(6000000);
+        // detachInterrupt(FLAME_SENSOR_PIN);
+        // sensor_blanked = true;
+        // timer1_attachInterrupt(reinitialiseSensor);
+        // timer1_enable(TIM_DIV16, TIM_EDGE, TIM_SINGLE);
+        // timer1_write(6000000);
+        blanking_start = millis();
     }
 }
 
@@ -48,6 +54,7 @@ void setup()
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     radio->displayParameters();
     dispatcher = new Dispatcher(radio, web);
+    flame_sensor =  new FlameSensor(FLAME_SENSOR_PIN);
 
     // pinMode(D1, INPUT_PULLUP);
     // attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
