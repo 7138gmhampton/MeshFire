@@ -15,9 +15,22 @@ EventLog* event_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
 
+ICACHE_RAM_ATTR void fireDetect();
+
+ICACHE_RAM_ATTR void reinitialiseSensor()
+{
+    attachInterrupt(FLAME_SENSOR_PIN, fireDetect, FALLING);
+}
+
 ICACHE_RAM_ATTR void fireDetect()
 {
-    if (flame_sensor->isDetectingFire()) event_log->addEvent(FlameSensor::generateEvent());
+    if (flame_sensor->isDetectingFire()) {
+        event_log->addEvent(FlameSensor::generateEvent());
+        detachInterrupt(FLAME_SENSOR_PIN);
+        timer1_attachInterrupt(reinitialiseSensor);
+        timer1_enable(TIM_DIV16, TIM_EDGE, TIM_SINGLE);
+        timer1_write(6000000);
+    }
 }
 
 ICACHE_RAM_ATTR void sendDummyRadio()
@@ -36,8 +49,9 @@ void setup()
     radio->displayParameters();
     dispatcher = new Dispatcher(radio, web);
 
-    pinMode(D1, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
+    // pinMode(D1, INPUT_PULLUP);
+    // attachInterrupt(digitalPinToInterrupt(D1), sendDummyRadio, FALLING);
+    attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
 }
 
 void loop()
