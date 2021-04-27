@@ -13,6 +13,7 @@
 #define CLEAR_WIFI_PIN D2
 
 #define BAUD_RATE 9600
+#define BLANKING_PERIOD_S 30000
 
 typedef struct FireEvent
 {
