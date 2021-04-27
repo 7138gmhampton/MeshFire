@@ -5,10 +5,10 @@
 #include <pins_arduino.h>
 
 #define FLAME_SENSOR_PIN D1
-#define RX_PIN D5
-#define TX_PIN D6
-#define M0_PIN D7
-#define M1_PIN D8
+#define RX_PIN D7
+#define TX_PIN D8
+#define M0_PIN D5
+#define M1_PIN D6
 #define AUX_PIN D9
 #define CLEAR_WIFI_PIN D2
 
