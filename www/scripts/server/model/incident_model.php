@@ -30,12 +30,15 @@ class IncidentModel extends Database
 
     public static function createIncident($incident)
     {
-        $command = 'INSERT INTO incident (code) VALUES (:code)';
+        $command = 'INSERT INTO incident (code, mac_address, time_stamp) '
+            .'VALUES (:code, :mac_address, :time_stamp)';
         $incident_array = json_decode($incident, true);
 
         try {
             $statement = self::prepareStatement($command, self::$up_user, self::$up_password);
             $statement->bindParam(':code', $incident_array['code']);
+            $statement->bindParam(':mac_address', $incident_array['mac_address']);
+            $statement->bindParam(':time_stamp', $incident_array['time_stamp']);
 
             $statement->execute();
         }
