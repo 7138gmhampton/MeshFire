@@ -9,7 +9,7 @@ class IncidentModel extends Database
 {
     public static function getAllIncidents()
     {
-        $command = 'SELECT code FROM incident;';
+        $command = 'SELECT code, mac_address, time_stamp FROM incident;';
         $result = null;
 
         try {
