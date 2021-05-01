@@ -21,7 +21,7 @@ void WifiPortal::post(FireEvent event)
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
     String event_code = String(event.identifier);
-    String payload = "incident=" + event_code;
+    String payload = "incident=" + event_code + "&mac_address=" + event.source_mac_address;
 
     int response = http.POST(payload);
     Serial.print("POST - ");

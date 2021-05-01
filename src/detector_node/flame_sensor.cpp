@@ -14,6 +14,7 @@ FireEvent FlameSensor::generateEvent()
     FireEvent event;
 
     generateRandomIdentifier().toCharArray(event.identifier, sizeof(event.identifier));
+    WiFi.macAddress().toCharArray(event.source_mac_address, sizeof(event.source_mac_address));
 
     return event;
 }

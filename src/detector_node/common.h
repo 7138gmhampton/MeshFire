@@ -18,6 +18,7 @@
 typedef struct FireEvent
 {
     char identifier[8];
+    char source_mac_address[18];
 
     bool operator==(const FireEvent& other) const { return strcmp(identifier, other.identifier) == 0; }
 };
