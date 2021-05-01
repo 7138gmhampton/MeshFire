@@ -41,7 +41,6 @@ class IncidentView
                 $each_incident['time_stamp']);
             array_push($all_incidents, $next_incident);
         }
-            // array_push($all_incidents, $each_incident['code']);
 
         return $all_incidents;
     }

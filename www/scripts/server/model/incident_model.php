@@ -38,7 +38,6 @@ class IncidentModel extends Database
             $statement = self::prepareStatement($command, self::$up_user, self::$up_password);
             $statement->bindParam(':code', $incident_array['code']);
             $statement->bindParam(':mac_address', $incident_array['mac_address']);
-            // $statement->bindParam(':time_stamp', $incident_array['time_stamp']);
 
             $statement->execute();
         }
