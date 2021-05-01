@@ -21,8 +21,8 @@ class Incident
         echo '<td>'.$this->code.'</td>';
         echo '<td>'.$this->mac_address.'</td>';
         echo '<td>'.$this->time_stamp->format(DateTime::ISO8601).'</td>';
-        
-        echo '<tr';
+
+        echo '</tr>';
     }
 }
 
