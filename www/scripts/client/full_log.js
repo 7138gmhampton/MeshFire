@@ -24,7 +24,7 @@ function attachIncident(incident)
     event_log.appendChild(table_row);
 }
 
-function drawMore()
+function requestMore()
 {
     awaiting = true;
     let xhttp = new XMLHttpRequest();
@@ -52,11 +52,11 @@ window.onscroll = function ()
     let bottom = document.body.clientHeight - window.innerHeight
     let position = window.scrollY;
 
-    if (position > last_position && position >= bottom & !awaiting) drawMore()
+    if (position > last_position && position >= bottom & !awaiting) requestMore()
     last_position = position;
 }
 
 window.onload = function () 
 {
-    drawMore();
+    requestMore();
 }
