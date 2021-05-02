@@ -34,37 +34,34 @@ class Incident
 
 class IncidentView
 {
+    private static function convertToObjects($assoc_incidents)
+    {
+        $incidents = array();
+        foreach ($assoc_incidents as $incident)
+            array_push($incidents, Incident::buildFromArray($incident));
+
+        return $incidents;
+    }
+    
     public static function all()
     {
         $incidents = json_decode(IncidentModel::getAllIncidents(), true);
 
-        $all_incidents = array();
-        foreach ($incidents as $incident) 
-            array_push($all_incidents, Incident::buildFromArray($incident));
-
-        return $all_incidents;
+        return self::convertToObjects($incidents);
     }
 
     public static function some(int $start, int $number)
     {
         $incidents = json_decode(IncidentModel::getSome($start, $number));
 
-        $these_incidents = array();
-        foreach ($incidents as $incident) 
-            array_push($these_incidents, Incident::buildFromArray($incident));
-
-        return $these_incidents;
+        return self::convertToObjects($incidents);
     }
 
     public static function recentTen()
     {
         $incidents = json_decode(IncidentModel::getRecent(10), true);
 
-        $recent_incidents = array();
-        foreach ($incidents as $incident) 
-            array_push($recent_incidents, Incident::buildFromArray($incident));
-
-        return $recent_incidents;
+        return self::convertToObjects($incidents);
     }
 } 
 ?>
