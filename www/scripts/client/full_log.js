@@ -42,6 +42,7 @@ function drawMore()
         if (this.readyState == 4 && this.status == 200) {
             // console.log(this.responseText);
             attachMore(this.responseText);
+            next_row += GULP_SIZE;
             awaiting = false;
         }
     };
