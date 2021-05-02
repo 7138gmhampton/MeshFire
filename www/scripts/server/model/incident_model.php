@@ -51,6 +51,11 @@ class IncidentModel extends Database
         return json_encode($result);
     }
 
+    /**
+     * Requests a subset of events from the event log ordered in reverse
+     * chronology
+     * @param int $start Indicates where to begin reading from - non-inclusive
+     */
     public static function getSome(int $start, int $number)
     {
         $command = 'SELECT code, mac_address, time_stamp FROM incident '
