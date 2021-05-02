@@ -30,8 +30,8 @@
             </table>
         </div> -->
         <div class="container">
-            <div class="row">
-                <div class="col">
+            <!-- <div class="row"> -->
+                <!-- <div class="col"> -->
                     <table>
                         <thead>
                             <th>Incident Code</th>
@@ -52,8 +52,8 @@
                             ?>
                         </tbody>
                     </table>
-                </div>
-            </div>
+                <!-- </div> -->
+            <!-- </div> -->
         </div>
     </body>
 </html>
