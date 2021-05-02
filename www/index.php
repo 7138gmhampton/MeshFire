@@ -36,7 +36,8 @@
         <div class="container">
             <!-- <div class="row"> -->
                 <!-- <div class="col"> -->
-                    <table class="table">
+                    <table class="table caption-top">
+                        <caption class="text-center">Recent Detection Events</caption>
                         <thead>
                             <tr>
                                 <th scope="col">Incident Code</th>
