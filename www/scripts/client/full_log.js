@@ -62,3 +62,8 @@ window.onscroll = function ()
     if (position > last_position && position >= bottom & !awaiting) drawMore()
     last_position = position;
 }
+
+window.onload = function () 
+{
+    drawMore();
+}
