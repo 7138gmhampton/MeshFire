@@ -34,7 +34,7 @@
             <h1>MeshFire Reporting Portal</h1>
         </div>
         <div class="container">
-            <!-- <div class="row"> -->
+            <div class="row">
                 <!-- <div class="col"> -->
                     <table class="table caption-top">
                         <caption class="text-center">Recent Detection Events</caption>
@@ -60,9 +60,13 @@
                         </tbody>
                     </table>
                 <!-- </div> -->
-            <!-- </div> -->
+            </div>
             <!-- <button class="mf-button">Dummy</button> -->
-            <a href="full_log.php" class="btn mf-button">Full Event Log</a>
+            <div class="row">
+                <div class="container text-center">
+                    <a href="full_log.php" class="btn mf-button">Full Event Log</a>
+                </div>
+            </div>
         </div>
     </body>
 </html>
