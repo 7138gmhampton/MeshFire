@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>MeshFire Reporting Portal</h1>
-        <div>
+        <!-- <div>
             <table>
                 <thead>
                     <th>Incident Code</th>
@@ -17,17 +17,43 @@
                     <th>Time of Recording</th>
                 </thead>
                 <?php
-                ini_set('display_errors', 1);
-                ini_set('display_startup_errors', 1);
-                error_reporting(E_ALL);
+                // ini_set('display_errors', 1);
+                // ini_set('display_startup_errors', 1);
+                // error_reporting(E_ALL);
 
-                include_once('scripts/server/view/incident_view.php');
+                // include_once('scripts/server/view/incident_view.php');
 
-                $incidents = IncidentView::all();
+                // $incidents = IncidentView::all();
 
-                foreach ($incidents as $incident) $incident->printTableRow();
+                // foreach ($incidents as $incident) $incident->printTableRow();
                 ?>
             </table>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <table>
+                        <thead>
+                            <th>Incident Code</th>
+                            <th>Source MAC Address</th>
+                            <th>Time of Recording</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                            ini_set('display_errors', 1);
+                            ini_set('display_startup_errors', 1);
+                            error_reporting(E_ALL);
+
+                            include_once('scripts/server/view/incident_view.php');
+
+                            $incidents = IncidentView::all();
+
+                            foreach ($incidents as $incident) $incident->printTableRow();
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
 </html>
