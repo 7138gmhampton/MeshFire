@@ -31,13 +31,37 @@ class IncidentModel extends Database
     public static function getRecent(int $number)
     {
         $command = 'SELECT code, mac_address, time_stamp FROM incident '
-            .'ORDER BY time_stamp ASC '
-            .'LIMIT :number';
+            .'ORDER BY time_stamp DESC '
+            .'LIMIT :number;';
         $result = null;
 
         try {
             $statement = self::prepareStatement($command, self::$down_user, self::$down_password);
             $statement->bindParam(':number', $number, PDO::PARAM_INT);
+
+            $statement->execute();
+
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $err) {
+            echo 'Error: '.$err->getMessage();
+            return null;
+        }
+
+        return json_encode($result);
+    }
+
+    public static function getSome(int $start, int $number)
+    {
+        $command = 'SELECT code, mac_address, time_stamp FROM incident '
+            .'ORDER BY time_stamp DESC '
+            .'LIMIT :offset, :number;';
+            $result = null;
+
+        try {
+            $statement = self::prepareStatement($command, self::$down_user, self::$down_password);
+            $statement->bindParam(':number', $number, PDO::PARAM_INT);
+            $statement->bindParam(':offset', $start, PDO::PARAM_INT);
 
             $statement->execute();
 
