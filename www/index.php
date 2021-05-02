@@ -8,7 +8,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
-        <h1>MeshFire Reporting Portal</h1>
+        <!-- <h1>MeshFire Reporting Portal</h1> -->
         <!-- <div>
             <table>
                 <thead>
@@ -29,6 +29,9 @@
                 ?>
             </table>
         </div> -->
+        <div class="container-fluid text-center">
+            <h1>MeshFire Reporting Portal</h1>
+        </div>
         <div class="container">
             <!-- <div class="row"> -->
                 <!-- <div class="col"> -->
