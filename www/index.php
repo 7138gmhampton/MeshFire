@@ -62,7 +62,7 @@
                 <!-- </div> -->
             <!-- </div> -->
             <!-- <button class="mf-button">Dummy</button> -->
-            <a href="#" class="btn mf-button">Full Event Log</a>
+            <a href="full_log.php" class="btn mf-button">Full Event Log</a>
         </div>
     </body>
 </html>

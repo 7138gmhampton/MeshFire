@@ -15,7 +15,7 @@
             <h1>MeshFire Reporting Portal</h1>
         </div>
         <div class="container text-center">
-            <a href="#" class="btn mf-button m-3">Back to Main</a>
+            <a href="index.php" class="btn mf-button m-3">Back to Main</a>
         </div>
         <div class="container">
             <table class="table">
