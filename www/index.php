@@ -53,7 +53,7 @@
 
                             include_once('scripts/server/view/incident_view.php');
 
-                            $incidents = IncidentView::all();
+                            $incidents = IncidentView::recentTen();
 
                             foreach ($incidents as $incident) $incident->printTableRow();
                             ?>
