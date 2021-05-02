@@ -3,6 +3,34 @@ var last_position = 0;
 const GULP_SIZE = 20
 var awaiting = false;
 
+function attachIncident(incident)
+{
+    let event_log = document.getElementById('eventLog');
+    let table_row = document.createElement('tr');
+
+    let code = document.createElement('td');
+    let code_text = document.createTextNode(incident.code);
+    code.appendChild(code_text);
+    table_row.appendChild(code);
+    let mac_address = document.createElement('td');
+    let mac_address_text = document.createTextNode(incident.mac_address);
+    mac_address.appendChild(mac_address_text);
+    table_row.appendChild(mac_address);
+    let time_stamp = document.createElement('td');
+    let time_stamp_text = document.createTextNode(incident.time_stamp);
+    time_stamp.appendChild(time_stamp_text);
+    table_row.appendChild(time_stamp);
+
+    event_log.appendChild(table_row);
+}
+
+function attachMore(new_incidents)
+{
+    let incidents = JSON.parse(new_incidents);
+
+    incidents.forEach(attachIncident);
+}
+
 function drawMore()
 {
     console.log('Draw More...')
@@ -12,7 +40,8 @@ function drawMore()
     xhttp.onreadystatechange = function ()
     {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            // console.log(this.responseText);
+            attachMore(this.responseText);
             awaiting = false;
         }
     };

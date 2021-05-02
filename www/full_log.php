@@ -26,7 +26,7 @@
                         <th scope="col">Time of Recording</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="eventLog">
                     <!-- AJAX drawn expanding table -->
                 </tbody>
             </table>
