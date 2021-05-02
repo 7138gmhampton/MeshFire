@@ -44,5 +44,22 @@ class IncidentView
 
         return $all_incidents;
     }
+
+    public static function recentTen()
+    {
+        // $incident_entries = IncidentModel::getRecent(10);
+        $incidents = json_decode(IncidentModel::getRecent(10), true);
+
+        $recent_incidents = array();
+        foreach ($incidents as $each_incident) {
+            $next_incident = new Incident(
+                $each_incident['code'], 
+                $each_incident['mac_address'], 
+                $each_incident['time_stamp']);
+            array_push($recent_incidents, $next_incident);
+        }
+
+        return $recent_incidents;
+    }
 } 
 ?>
