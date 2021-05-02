@@ -45,6 +45,22 @@ class IncidentView
         return $all_incidents;
     }
 
+    public static function some(int $start, int $number)
+    {
+        $incidents = json_decode(IncidentModel::getSome($start, $number));
+
+        $these_incidents = array();
+        foreach ($incidents as $incident) {
+            $next_incident = new Incident(
+                $incident['code'], 
+                $incident['mac_address'], 
+                $incident['time_stamp']);
+            array_push($these_incidents, $next_incident);
+        }
+
+        return $these_incidents;
+    }
+
     public static function recentTen()
     {
         // $incident_entries = IncidentModel::getRecent(10);
