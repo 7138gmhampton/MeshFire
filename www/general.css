@@ -7,3 +7,15 @@
 .mf-banner {
     background-color: #739E82;
 }
+
+a.mf-button {
+    background-color: #2C5530 !important;
+    border-color: #2C5530 !important;
+    color: #FFFFFF;
+}
+
+a.mf-button:hover {
+    background-color: #739E82 !important;
+    border-color: #739E82 !important;
+    color: #FFFFFF;
+}

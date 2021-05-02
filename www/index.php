@@ -61,6 +61,8 @@
                     </table>
                 <!-- </div> -->
             <!-- </div> -->
+            <!-- <button class="mf-button">Dummy</button> -->
+            <a href="#" class="btn mf-button">Full Event Log</a>
         </div>
     </body>
 </html>
