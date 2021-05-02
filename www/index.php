@@ -6,6 +6,7 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="general.css" />
     </head>
     <body>
         <!-- <h1>MeshFire Reporting Portal</h1> -->
@@ -29,7 +30,7 @@
                 ?>
             </table>
         </div> -->
-        <div class="container-fluid text-center">
+        <div class="container-fluid text-center mf-banner pb-3">
             <h1>MeshFire Reporting Portal</h1>
         </div>
         <div class="container">
@@ -37,9 +38,11 @@
                 <!-- <div class="col"> -->
                     <table>
                         <thead>
-                            <th>Incident Code</th>
-                            <th>Source MAC Address</th>
-                            <th>Time of Recording</th>
+                            <tr>
+                                <th>Incident Code</th>
+                                <th>Source MAC Address</th>
+                                <th>Time of Recording</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <?php
