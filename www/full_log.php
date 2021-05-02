@@ -14,7 +14,21 @@
             <h1>MeshFire Reporting Portal</h1>
         </div>
         <div class="container text-center">
-            <a href="#" class="btn mf-button">Back to Main</a>
+            <a href="#" class="btn mf-button m-3">Back to Main</a>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Incident Code</th>
+                        <th scope="col">Source MAC Address</th>
+                        <th scope="col">Time of Recording</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- AJAX drawn expanding table -->
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
