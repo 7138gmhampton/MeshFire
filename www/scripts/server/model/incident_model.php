@@ -37,7 +37,7 @@ class IncidentModel extends Database
 
         try {
             $statement = self::prepareStatement($command, self::$down_user, self::$down_password);
-            $statement->bindParam(':number', $number);
+            $statement->bindParam(':number', $number, PDO::PARAM_INT);
 
             $statement->execute();
 
