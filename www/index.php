@@ -36,12 +36,12 @@
         <div class="container">
             <!-- <div class="row"> -->
                 <!-- <div class="col"> -->
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th>Incident Code</th>
-                                <th>Source MAC Address</th>
-                                <th>Time of Recording</th>
+                                <th scope="col">Incident Code</th>
+                                <th scope="col">Source MAC Address</th>
+                                <th scope="col">Time of Recording</th>
                             </tr>
                         </thead>
                         <tbody>
