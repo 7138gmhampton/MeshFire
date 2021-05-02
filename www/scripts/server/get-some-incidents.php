@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// require_once('/var/www/html/mesh-fire/scripts/server/view/incident_view.php');
 require_once('/var/www/html/mesh-fire/scripts/server/model/incident_model.php');
 
 if (isset($_GET['start']) && isset($_GET['number']))

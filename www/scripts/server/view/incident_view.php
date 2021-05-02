@@ -63,7 +63,6 @@ class IncidentView
 
     public static function recentTen()
     {
-        // $incident_entries = IncidentModel::getRecent(10);
         $incidents = json_decode(IncidentModel::getRecent(10), true);
 
         $recent_incidents = array();

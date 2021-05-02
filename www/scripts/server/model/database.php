@@ -3,8 +3,6 @@
 class Database
 {
     private static $connection_string = 'mysql:host=localhost;dbname=mf';
-    // private static $user = 'beaumains';
-    // private static $password = '1`~.LmdSMfy&/A';
     protected static $down_user = 'downstream';
     protected static $down_password = 'rIs68o2JJb!Z';
     protected static $up_user = 'upstream';
