@@ -38,7 +38,12 @@ function drawMore()
         }
     };
 
-    xhttp.open('GET', 'http://139.59.173.54/mesh-fire/scripts/server/get-some-incidents.php?start=' + next_row + '&number=' + 20);
+    xhttp.open(
+        'GET', 
+        'http://139.59.173.54/mesh-fire/scripts/server/get-some-incidents.php?start=' 
+            + next_row 
+            + '&number=' 
+            + GULP_SIZE);
     xhttp.send();
 }
 
