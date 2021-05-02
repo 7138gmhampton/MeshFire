@@ -24,13 +24,6 @@ function attachIncident(incident)
     event_log.appendChild(table_row);
 }
 
-// function attachMore(new_incidents)
-// {
-//     let incidents = JSON.parse(new_incidents);
-
-//     incidents.forEach(attachIncident);
-// }
-
 function drawMore()
 {
     awaiting = true;
@@ -39,7 +32,6 @@ function drawMore()
     xhttp.onreadystatechange = function ()
     {
         if (this.readyState == 4 && this.status == 200) {
-            // attachMore(this.responseText);
             JSON.parse(this.responseText).forEach(attachIncident);
             next_row += GULP_SIZE;
             awaiting = false;
