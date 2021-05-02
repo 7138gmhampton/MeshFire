@@ -3,23 +3,23 @@ var last_position = 0;
 const GULP_SIZE = 20
 var awaiting = false;
 
+function attachDataCell(row, content)
+{
+    let cell = document.createElement('td');
+    let cell_text = document.createTextNode(content);
+
+    cell.appendChild(cell_text);
+    row.appendChild(cell);
+}
+
 function attachIncident(incident)
 {
     let event_log = document.getElementById('eventLog');
     let table_row = document.createElement('tr');
 
-    let code = document.createElement('td');
-    let code_text = document.createTextNode(incident.code);
-    code.appendChild(code_text);
-    table_row.appendChild(code);
-    let mac_address = document.createElement('td');
-    let mac_address_text = document.createTextNode(incident.mac_address);
-    mac_address.appendChild(mac_address_text);
-    table_row.appendChild(mac_address);
-    let time_stamp = document.createElement('td');
-    let time_stamp_text = document.createTextNode(incident.time_stamp);
-    time_stamp.appendChild(time_stamp_text);
-    table_row.appendChild(time_stamp);
+    attachDataCell(table_row, incident.code);
+    attachDataCell(table_row, incident.mac_address);
+    attachDataCell(table_row, incident.time_stamp);
 
     event_log.appendChild(table_row);
 }
