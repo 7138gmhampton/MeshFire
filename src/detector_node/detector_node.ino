@@ -28,7 +28,6 @@ void setup()
     web = new WifiPortal();
     event_log = new EventLog();
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
-    radio->displayParameters();
     dispatcher = new Dispatcher(radio, web);
     flame_sensor =  new FlameSensor(FLAME_SENSOR_PIN);
 
