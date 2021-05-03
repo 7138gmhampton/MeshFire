@@ -19,7 +19,7 @@ unsigned long blanking_start;
 
 ICACHE_RAM_ATTR void fireDetect()
 {
-    if ((millis() - blanking_start > BLANKING_PERIOD_S) && flame_sensor->isDetectingFire()) {
+    if ((millis() - blanking_start > BLANKING_PERIOD_MS) && flame_sensor->isDetectingFire()) {
         event_log->addEvent(FlameSensor::generateEvent());
         blanking_start = millis();
     }
