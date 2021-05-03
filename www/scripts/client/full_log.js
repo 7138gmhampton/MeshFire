@@ -37,13 +37,9 @@ function requestMore()
             awaiting = false;
         }
     };
-
-    xhttp.open(
-        'GET', 
-        'http://139.59.173.54/mesh-fire/scripts/server/get-some-incidents.php?start=' 
-            + next_row 
-            + '&number=' 
-            + GULP_SIZE);
+    
+    const url = 'http://139.59.173.54/mesh-fire/scripts/server/get-some-incidents.php';
+    xhttp.open('GET', `${url}?start=${next_row}&number=${GULP_SIZE}`);
     xhttp.send();
 }
 
