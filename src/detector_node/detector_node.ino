@@ -13,9 +13,11 @@ WifiPortal* web;
 
 unsigned long blanking_start;
 
+bool isInBlankingPeriod() { return millis() - blanking_start > BLANKING_PERIOD_MS; }
+
 ICACHE_RAM_ATTR void fireDetect()
 {
-    if ((millis() - blanking_start > BLANKING_PERIOD_MS) && flame_sensor->isDetectingFire()) {
+    if (isInBlankingPeriod() && flame_sensor->isDetectingFire()) {
         incident_log->addEvent(FlameSensor::generateEvent());
         blanking_start = millis();
     }
