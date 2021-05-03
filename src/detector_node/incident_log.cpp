@@ -1,4 +1,4 @@
-#include "event_log.h"
+#include "incident_log.h"
 
 IncidentLog::IncidentLog() { }
 

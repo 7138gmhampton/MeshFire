@@ -2,7 +2,7 @@
 
 #include "flame_sensor.h"
 #include "radio.h"
-#include "event_log.h"
+#include "incident_log.h"
 #include "wifi_portal.h"
 
 FlameSensor* flame_sensor;
