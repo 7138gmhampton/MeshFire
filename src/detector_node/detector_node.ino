@@ -7,7 +7,7 @@
 
 FlameSensor* flame_sensor;
 MeshNetwork::Radio* radio; 
-EventLog* event_log;
+IncidentLog* incident_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
 
@@ -16,7 +16,7 @@ unsigned long blanking_start;
 ICACHE_RAM_ATTR void fireDetect()
 {
     if ((millis() - blanking_start > BLANKING_PERIOD_MS) && flame_sensor->isDetectingFire()) {
-        event_log->addEvent(FlameSensor::generateEvent());
+        incident_log->addEvent(FlameSensor::generateEvent());
         blanking_start = millis();
     }
 }
@@ -26,7 +26,7 @@ void setup()
     Serial.begin(BAUD_RATE);
 
     web = new WifiPortal();
-    event_log = new EventLog();
+    incident_log = new IncidentLog();
     radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     dispatcher = new Dispatcher(radio, web);
     flame_sensor =  new FlameSensor(FLAME_SENSOR_PIN);
@@ -38,10 +38,10 @@ void loop()
 {
     while (radio->hasWaiting()) {
         FireIncident received = radio->getNextMessage();
-        event_log->addEvent(received);
+        incident_log->addEvent(received);
     }
 
-    while (event_log->hasUnprocessed()) event_log->processNext(dispatcher);
+    while (incident_log->hasUnprocessed()) incident_log->processNext(dispatcher);
 
     delay(250);
 }
