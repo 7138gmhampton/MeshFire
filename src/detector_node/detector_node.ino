@@ -24,7 +24,6 @@ ICACHE_RAM_ATTR void fireDetect()
 void setup()
 {
     Serial.begin(BAUD_RATE);
-    Serial.print("Serial logging - Check\n\r");
 
     web = new WifiPortal();
     event_log = new EventLog();
