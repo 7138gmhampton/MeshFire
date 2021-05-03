@@ -18,12 +18,8 @@ class WifiPortal
     public:
         WifiPortal();
 
-        // Accessors/Mutators
-
         bool isActive() const { return active; }
         
-        // Other Methods
-
         void post(FireIncident event);
 };
 
