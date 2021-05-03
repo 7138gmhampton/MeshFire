@@ -6,7 +6,7 @@
 #include "wifi_portal.h"
 
 FlameSensor* flame_sensor;
-MeshNetwork::Radio* radio; 
+Radio* radio; 
 IncidentLog* incident_log;
 Dispatcher* dispatcher;
 WifiPortal* web;
@@ -27,7 +27,7 @@ void setup()
 
     web = new WifiPortal();
     incident_log = new IncidentLog();
-    radio = new MeshNetwork::Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
+    radio = new Radio(RX_PIN, TX_PIN, M0_PIN, M1_PIN, AUX_PIN);
     dispatcher = new Dispatcher(radio, web);
     flame_sensor =  new FlameSensor(FLAME_SENSOR_PIN);
 

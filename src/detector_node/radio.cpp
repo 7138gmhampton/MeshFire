@@ -1,7 +1,5 @@
 #include "radio.h"
 
-using namespace MeshNetwork;
-
 Radio::Radio(uint8_t rx_pin, uint8_t tx_pin, uint8_t m0_pin, uint8_t m1_pin, uint8_t aux_pin)
 {
     this->transceiver_serial = new SoftwareSerial(rx_pin, tx_pin);

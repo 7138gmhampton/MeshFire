@@ -12,11 +12,11 @@
 class Dispatcher
 {
     private:
-        MeshNetwork::Radio* radio;
+        Radio* radio;
         WifiPortal* web;
     
     public:
-        Dispatcher(MeshNetwork::Radio* radio, WifiPortal* web);
+        Dispatcher(Radio* radio, WifiPortal* web);
 
         void dispatch(FireIncident event);
 };

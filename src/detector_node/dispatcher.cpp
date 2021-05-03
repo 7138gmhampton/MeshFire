@@ -1,6 +1,6 @@
 #include "dispatcher.h"
 
-Dispatcher::Dispatcher(MeshNetwork::Radio* radio, WifiPortal* web) 
+Dispatcher::Dispatcher(Radio* radio, WifiPortal* web) 
 {
     this->radio = radio;
     this->web = web;
