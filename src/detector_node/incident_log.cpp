@@ -13,6 +13,8 @@ bool IncidentLog::isInLog(FireIncident event)
 void IncidentLog::addEvent(FireIncident event)
 {
     if (!isInLog(event)) unprocessed_events.push_back(event);
+
+    pruneOldestFromLog();
 }
 
 bool IncidentLog::hasUnprocessed() { return unprocessed_events.size() > 0; }
@@ -25,4 +27,11 @@ void IncidentLog::processNext(Dispatcher* dispatcher)
 
     unprocessed_events.pop_front();
     recent_events.push_back(next_event);
+}
+
+void IncidentLog::pruneOldestFromLog()
+{
+    if (recent_events.size() > 100)
+        while (recent_events.size() > 50)
+            recent_events.pop_front();
 }
