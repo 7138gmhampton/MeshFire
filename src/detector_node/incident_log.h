@@ -8,6 +8,9 @@
 
 using std::deque;
 
+/// This log maintains two queues - the first with new entries from the sensors
+/// or received from the radio interlinks; the second has a list of the last 50 
+/// that were handled by this unit
 class IncidentLog
 {
     private:
