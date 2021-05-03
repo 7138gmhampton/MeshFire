@@ -32,6 +32,7 @@ void setup()
     flame_sensor =  new FlameSensor(FLAME_SENSOR_PIN);
 
     attachInterrupt(digitalPinToInterrupt(FLAME_SENSOR_PIN), fireDetect, FALLING);
+    blanking_start = millis() - BLANKING_PERIOD_MS;
 }
 
 void loop()
