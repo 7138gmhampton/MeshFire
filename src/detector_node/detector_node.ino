@@ -1,8 +1,4 @@
 #include <Arduino.h>
-#include <WiFiManager.h>
-#include <ESP8266HTTPClient.h>
-#include <SoftwareSerial.h>
-#include "EBYTE.h"
 
 #include "flame_sensor.h"
 #include "radio.h"
