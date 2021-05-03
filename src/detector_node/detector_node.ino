@@ -37,7 +37,7 @@ void setup()
 void loop()
 {
     while (radio->hasWaiting()) {
-        FireEvent received = radio->getNextMessage();
+        FireIncident received = radio->getNextMessage();
         event_log->addEvent(received);
     }
 

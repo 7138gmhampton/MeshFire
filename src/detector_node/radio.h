@@ -20,9 +20,9 @@ namespace MeshNetwork
         public:
             Radio(uint8_t rx_pin, uint8_t tx_pin, uint8_t m0_pin, uint8_t m1_pin, uint8_t aux_pin);
 
-            void transmit(FireEvent event);
+            void transmit(FireIncident event);
             bool hasWaiting();
-            FireEvent getNextMessage();
+            FireIncident getNextMessage();
             void displayParameters();
     };
 }

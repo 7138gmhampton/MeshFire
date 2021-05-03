@@ -18,7 +18,7 @@ class FlameSensor
         FlameSensor(uint8_t pin);
         
         bool isDetectingFire();
-        static FireEvent generateEvent();
+        static FireIncident generateEvent();
 };
 
 #endif // FLAME_SENSOR_H

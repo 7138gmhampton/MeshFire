@@ -15,12 +15,12 @@
 #define BAUD_RATE 9600
 #define BLANKING_PERIOD_MS 30000
 
-typedef struct FireEvent
+typedef struct FireIncident
 {
     char identifier[8];
     char source_mac_address[18];
 
-    bool operator==(const FireEvent& other) const { return strcmp(identifier, other.identifier) == 0; }
+    bool operator==(const FireIncident& other) const { return strcmp(identifier, other.identifier) == 0; }
 };
 
 #endif // COMMON_H

@@ -18,7 +18,7 @@ class Dispatcher
     public:
         Dispatcher(MeshNetwork::Radio* radio, WifiPortal* web);
 
-        void dispatch(FireEvent event);
+        void dispatch(FireIncident event);
 };
 
 #endif // DISPATCHER_H

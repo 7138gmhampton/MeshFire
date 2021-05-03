@@ -16,7 +16,7 @@ void Radio::displayParameters()
     transceiver->PrintParameters();
 }
 
-void Radio::transmit(FireEvent event)
+void Radio::transmit(FireIncident event)
 {
     transceiver->SendStruct(&event, sizeof(event));
 }
@@ -26,9 +26,9 @@ bool Radio::hasWaiting()
     return transceiver->available();
 }
 
-FireEvent Radio::getNextMessage()
+FireIncident Radio::getNextMessage()
 {
-    FireEvent next_message;
+    FireIncident next_message;
 
     transceiver->GetStruct(&next_message, sizeof(next_message));
 

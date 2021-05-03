@@ -24,7 +24,7 @@ class WifiPortal
         
         // Other Methods
 
-        void post(FireEvent event);
+        void post(FireIncident event);
 };
 
 #endif // WIFI_PORTAL_H

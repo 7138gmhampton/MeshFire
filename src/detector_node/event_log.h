@@ -11,15 +11,15 @@ using std::deque;
 class EventLog
 {
     private:
-        deque<FireEvent> unprocessed_events;
-        deque<FireEvent> recent_events;
+        deque<FireIncident> unprocessed_events;
+        deque<FireIncident> recent_events;
 
-        bool isInLog(FireEvent notification);
+        bool isInLog(FireIncident notification);
 
     public:
         EventLog();
 
-        void addEvent(FireEvent event);
+        void addEvent(FireIncident event);
         /// If log exceeds 100 entries, this function will remove them until
         /// only 50 remain - beginning with the oldest
         void pruneLog();

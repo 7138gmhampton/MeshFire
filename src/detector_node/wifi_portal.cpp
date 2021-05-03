@@ -14,7 +14,7 @@ WifiPortal::WifiPortal()
     }
 }
 
-void WifiPortal::post(FireEvent event)
+void WifiPortal::post(FireIncident event)
 {
     HTTPClient http;
     http.begin("http://139.59.173.54/mesh-fire/scripts/server/append-incident.php");

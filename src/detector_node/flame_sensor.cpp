@@ -9,9 +9,9 @@ FlameSensor::FlameSensor(uint8_t pin)
 
 bool FlameSensor::isDetectingFire() { return digitalRead(pin) == LOW; }
 
-FireEvent FlameSensor::generateEvent()
+FireIncident FlameSensor::generateEvent()
 {
-    FireEvent event;
+    FireIncident event;
 
     generateRandomIdentifier().toCharArray(event.identifier, sizeof(event.identifier));
     WiFi.macAddress().toCharArray(event.source_mac_address, sizeof(event.source_mac_address));
