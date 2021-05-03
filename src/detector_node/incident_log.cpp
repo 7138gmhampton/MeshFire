@@ -17,8 +17,6 @@ void IncidentLog::addEvent(FireIncident event)
     pruneOldestFromLog();
 }
 
-bool IncidentLog::hasUnprocessed() { return unprocessed_events.size() > 0; }
-
 void IncidentLog::processNext(Dispatcher* dispatcher)
 {
     FireIncident next_event = unprocessed_events.front();

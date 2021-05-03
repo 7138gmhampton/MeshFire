@@ -23,8 +23,8 @@ class IncidentLog
     public:
         IncidentLog();
 
+        bool hasUnprocessed() { return unprocessed_events.size() > 0; };
         void addEvent(FireIncident event);
-        bool hasUnprocessed();
         void processNext(Dispatcher* dispatcher);
 };
 
