@@ -13,36 +13,32 @@
             <h1>MeshFire Reporting Portal</h1>
         </div>
         <div class="container">
-            <div class="row">
-                    <table class="table caption-top">
-                        <caption class="text-center">Recent Detection Events</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Incident Code</th>
-                                <th scope="col">Source MAC Address</th>
-                                <th scope="col">Time of Recording</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            ini_set('display_errors', 1);
-                            ini_set('display_startup_errors', 1);
-                            error_reporting(E_ALL);
+            <table class="table caption-top">
+                <caption class="text-center">Recent Detection Events</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Incident Code</th>
+                        <th scope="col">Source MAC Address</th>
+                        <th scope="col">Time of Recording</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    ini_set('display_errors', 1);
+                    ini_set('display_startup_errors', 1);
+                    error_reporting(E_ALL);
 
-                            include_once('scripts/server/view/incident_view.php');
+                    include_once('scripts/server/view/incident_view.php');
 
-                            $incidents = IncidentView::recentTen();
+                    $incidents = IncidentView::recentTen();
 
-                            foreach ($incidents as $incident) $incident->printTableRow();
-                            ?>
-                        </tbody>
-                    </table>
-            </div>
-            <div class="row">
-                <div class="container text-center">
-                    <a href="full_log.php" class="btn mf-button">Full Event Log</a>
-                </div>
-            </div>
+                    foreach ($incidents as $incident) $incident->printTableRow();
+                    ?>
+                </tbody>
+            </table>
+        </div>>
+        <div class="container text-center">
+            <a href="full_log.php" class="btn mf-button">Full Event Log</a>
         </div>
     </body>
 </html>
