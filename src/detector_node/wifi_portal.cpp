@@ -24,7 +24,5 @@ void WifiPortal::post(FireIncident event)
     String payload = "incident=" + event_code + "&mac_address=" + event.source_mac_address;
 
     int response = http.POST(payload);
-    Serial.print("POST - ");
-    Serial.println(response);
     http.end();
 }
